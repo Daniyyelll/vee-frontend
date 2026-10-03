@@ -1,0 +1,220 @@
+{
+  "title": "Vee's first storefront",
+  "question": "Luxury rooted in nature: rich, comforting, and calming. Choose the storefront composition to build.",
+  "options": [
+    {
+      "id": "assigned",
+      "label": "The forest sanctuary",
+      "kicker": "THE ROLL",
+      "lineage": "A botanical cosmetic case opening onto pale stone terraces",
+      "thesis": "A deep forest-green shell opens into a light stone collection, like a quiet garden sanctuary.",
+      "palette": [
+        "#183D32",
+        "#EAEDE5",
+        "#A6B6A0",
+        "#162C24"
+      ],
+      "materials": [
+        "botanical photography",
+        "honed pale stone",
+        "deep green satin"
+      ],
+      "viewport": "Vee sits above a still life of cosmetics, leaves, and stone; a light inset holds the collection action.",
+      "risk": "The natural imagery expresses a feeling; it must never imply unverified natural ingredients.",
+      "raised": [
+        {
+          "from": "Seven-segment display",
+          "raise": "Bag counts and selected shades keep stable positions across state changes."
+        },
+        {
+          "from": "One-bit desktop",
+          "raise": "Every selection, disabled control, and pressed state has an unmistakable visual signal."
+        },
+        {
+          "from": "Rubber-hose cel",
+          "raise": "One coordinated opening gesture replaces scattered decorative animations."
+        },
+        {
+          "from": "Posada broadside",
+          "raise": "The collection has confident product density rather than endless oversized cards."
+        },
+        {
+          "from": "Alphabet storm",
+          "raise": "The Vee wordmark owns a decisive scale while all shopping labels remain readable."
+        },
+        {
+          "from": "Amber light hall",
+          "raise": "The opening has one immersive botanical setting, while collection surfaces stay quiet."
+        }
+      ],
+      "comp": ".impeccable/mocks/decision/assigned.png"
+    },
+    {
+      "id": "model-pick",
+      "label": "The botanical atelier",
+      "kicker": "IMPECCABLE’S PICK",
+      "thesis": "A sunlit botanical studio presents cosmetics beside sculptural leaves and warm stone.",
+      "palette": [
+        "#25483C",
+        "#D8DACE",
+        "#F3F2EB",
+        "#25352B"
+      ],
+      "materials": [
+        "soft daylight",
+        "botanical still life",
+        "limestone ledges"
+      ],
+      "viewport": "A spacious botanical still life shares the screen with an elegant headline and direct collection link.",
+      "risk": "A familiar luxury campaign composition; the calm depends on excellent photography.",
+      "comp": ".impeccable/mocks/decision/model-pick.png"
+    },
+    {
+      "id": "challenger-sun",
+      "label": "The amber light hall",
+      "verdict": "declined",
+      "thesis": "Vee's collection occupies a vast amber-lit hall, with silhouettes and reflected selection states.",
+      "palette": [
+        "#E5A12B",
+        "#F1C569",
+        "#16120E"
+      ],
+      "materials": [
+        "sodium amber light",
+        "mirrored ceiling",
+        "soft haze"
+      ],
+      "viewport": "A luminous horizontal hall frames the product silhouette and a low, clear collection action.",
+      "case": "The amber installation carries richness but loses the requested botanical comfort and cosmetic color clarity.",
+      "risk": "Product detail screens must restore accurate product colors.",
+      "hero": "https://impeccable.style/worlds/cards/light-shadow-caustics-indoor-weather-sun-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/light-shadow-caustics-indoor-weather-sun.webp",
+      "comp": ".impeccable/mocks/decision/sun.png",
+      "kept": "One immersive environmental scene rather than competing decorations."
+    },
+    {
+      "id": "challenger-segments",
+      "label": "Seven-segment display",
+      "verdict": "declined",
+      "thesis": "A fixed luminous mask organizes shade numbers and shopping counts.",
+      "palette": [
+        "#141414",
+        "#EB502F",
+        "#51302A"
+      ],
+      "materials": [
+        "matte instrument panel",
+        "lit and ghost segments"
+      ],
+      "viewport": "Large fixed shade digits organize the product selection.",
+      "risk": "Instrument controls obscure cosmetic names and read as electronics.",
+      "case": "Loses both customer identification and product clarity for a first cosmetics storefront.",
+      "kept": "Stable positions for shopping counts and shade states."
+    },
+    {
+      "id": "challenger-desktop",
+      "label": "One-bit desktop",
+      "verdict": "declined",
+      "thesis": "Products open in crisp monochrome windows on a single desktop plane.",
+      "palette": [
+        "#000000",
+        "#FFFFFF",
+        "#808080"
+      ],
+      "materials": [
+        "pixel dithers",
+        "one-pixel window chrome"
+      ],
+      "viewport": "A tiled cosmetic catalog opens into overlapping detail windows.",
+      "risk": "One-bit product imagery cannot accurately communicate cosmetic colors.",
+      "case": "Loses luxury identification and cosmetic shade clarity.",
+      "kept": "Explicit selected, disabled, and pressed states."
+    },
+    {
+      "id": "challenger-cel",
+      "label": "Rubber-hose cel",
+      "verdict": "declined",
+      "thesis": "Rounded cosmetic scenes arrive through an animated iris.",
+      "palette": [
+        "#151515",
+        "#FFFFFF",
+        "#B8B8B8"
+      ],
+      "materials": [
+        "confident black ink",
+        "gray wash",
+        "rounded cel shapes"
+      ],
+      "viewport": "An oval product scene opens with rubbery shopping controls.",
+      "risk": "Gag-driven movement distracts from evaluating products.",
+      "case": "Loses luxury identification and a direct, legible shopping path.",
+      "kept": "A single coherent transition grammar."
+    },
+    {
+      "id": "challenger-broadside",
+      "label": "Posada broadside",
+      "verdict": "declined",
+      "thesis": "The cosmetic collection becomes a dense printed sheet under one engraved image band.",
+      "palette": [
+        "#201F1C",
+        "#DCD8CD",
+        "#AE322B"
+      ],
+      "materials": [
+        "coarse newsprint",
+        "black relief ink"
+      ],
+      "viewport": "A shouting product headline leads into two tightly set collection columns.",
+      "risk": "Cheap-paper printing and skeletal imagery conflict with the current luxury brief.",
+      "case": "Loses customer identification and makes product comparison harder.",
+      "kept": "Confident density for the collection layout."
+    },
+    {
+      "id": "challenger-storm",
+      "label": "Alphabet storm",
+      "verdict": "declined",
+      "thesis": "Cosmetic category words gather and dissolve into a typographic landscape.",
+      "palette": [
+        "#FFFFFF",
+        "#121212",
+        "#A8A8A8"
+      ],
+      "materials": [
+        "monumental type",
+        "procedural letter particles"
+      ],
+      "viewport": "A large cosmetic category word transforms above the collection action.",
+      "risk": "Word transformation demonstrates language rather than the cosmetics.",
+      "case": "Loses customer identification and concrete product clarity.",
+      "kept": "Decisive typographic scale with readable shopping labels."
+    }
+  ],
+  "reroll": {
+    "registers": [
+      "safer",
+      "bolder"
+    ]
+  },
+  "buildPath": {
+    "value": "code",
+    "toggle": true
+  },
+  "canon": true,
+  "canonCard": {
+    "label": "Classic luxury storefront",
+    "thesis": "A familiar luxury storefront with botanical photography, soft stone surfaces, and direct shopping.",
+    "palette": [
+      "#F3F2EB",
+      "#25483C",
+      "#D8DACE"
+    ],
+    "materials": [
+      "product photography",
+      "clean collection grid"
+    ],
+    "viewport": "A familiar navigation bar, campaign image, shopping action, and featured product row.",
+    "risk": "Easy to understand, with less distinctive brand recognition.",
+    "comp": ".impeccable/mocks/decision/canon.png"
+  },
+  "steer": true
+}

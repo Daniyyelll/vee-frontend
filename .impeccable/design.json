@@ -1,0 +1,325 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-29T06:17:11.738130Z",
+  "title": "Design System: Vee",
+  "extensions": {
+    "colorMeta": {
+      "ivory": {
+        "role": "neutral",
+        "displayName": "Warm ivory",
+        "tonalRamp": [
+          "oklch(15.0% 0.0108 76.60)",
+          "oklch(26.4% 0.0108 76.60)",
+          "oklch(37.9% 0.0108 76.60)",
+          "oklch(49.3% 0.0108 76.60)",
+          "oklch(60.7% 0.0108 76.60)",
+          "oklch(72.1% 0.0108 76.60)",
+          "oklch(83.6% 0.0108 76.60)",
+          "oklch(95.0% 0.0108 76.60)"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "tonalRamp": [
+          "oklch(15.0% 0.0074 80.72)",
+          "oklch(26.4% 0.0074 80.72)",
+          "oklch(37.9% 0.0074 80.72)",
+          "oklch(49.3% 0.0074 80.72)",
+          "oklch(60.7% 0.0074 80.72)",
+          "oklch(72.1% 0.0074 80.72)",
+          "oklch(83.6% 0.0074 80.72)",
+          "oklch(95.0% 0.0074 80.72)"
+        ]
+      },
+      "blush": {
+        "role": "secondary",
+        "displayName": "Peach blush",
+        "tonalRamp": [
+          "oklch(15.0% 0.0468 47.42)",
+          "oklch(26.4% 0.0468 47.42)",
+          "oklch(37.9% 0.0468 47.42)",
+          "oklch(49.3% 0.0468 47.42)",
+          "oklch(60.7% 0.0468 47.42)",
+          "oklch(72.1% 0.0468 47.42)",
+          "oklch(83.6% 0.0468 47.42)",
+          "oklch(95.0% 0.0468 47.42)"
+        ]
+      },
+      "rose": {
+        "role": "primary",
+        "displayName": "Rose copper",
+        "tonalRamp": [
+          "oklch(15.0% 0.0756 51.89)",
+          "oklch(26.4% 0.0756 51.89)",
+          "oklch(37.9% 0.0756 51.89)",
+          "oklch(49.3% 0.0756 51.89)",
+          "oklch(60.7% 0.0756 51.89)",
+          "oklch(72.1% 0.0756 51.89)",
+          "oklch(83.6% 0.0756 51.89)",
+          "oklch(95.0% 0.0756 51.89)"
+        ]
+      },
+      "cocoa": {
+        "role": "primary",
+        "displayName": "Cocoa",
+        "tonalRamp": [
+          "oklch(15.0% 0.0368 47.64)",
+          "oklch(26.4% 0.0368 47.64)",
+          "oklch(37.9% 0.0368 47.64)",
+          "oklch(49.3% 0.0368 47.64)",
+          "oklch(60.7% 0.0368 47.64)",
+          "oklch(72.1% 0.0368 47.64)",
+          "oklch(83.6% 0.0368 47.64)",
+          "oklch(95.0% 0.0368 47.64)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted cocoa",
+        "tonalRamp": [
+          "oklch(15.0% 0.0415 48.76)",
+          "oklch(26.4% 0.0415 48.76)",
+          "oklch(37.9% 0.0415 48.76)",
+          "oklch(49.3% 0.0415 48.76)",
+          "oklch(60.7% 0.0415 48.76)",
+          "oklch(72.1% 0.0415 48.76)",
+          "oklch(83.6% 0.0415 48.76)",
+          "oklch(95.0% 0.0415 48.76)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Mineral seam",
+        "tonalRamp": [
+          "oklch(15.0% 0.0264 63.68)",
+          "oklch(26.4% 0.0264 63.68)",
+          "oklch(37.9% 0.0264 63.68)",
+          "oklch(49.3% 0.0264 63.68)",
+          "oklch(60.7% 0.0264 63.68)",
+          "oklch(72.1% 0.0264 63.68)",
+          "oklch(83.6% 0.0264 63.68)",
+          "oklch(95.0% 0.0264 63.68)"
+        ]
+      },
+      "error-text": {
+        "role": "primary",
+        "displayName": "Warm error text",
+        "tonalRamp": [
+          "oklch(15.0% 0.0919 36.28)",
+          "oklch(26.4% 0.0919 36.28)",
+          "oklch(37.9% 0.0919 36.28)",
+          "oklch(49.3% 0.0919 36.28)",
+          "oklch(60.7% 0.0919 36.28)",
+          "oklch(72.1% 0.0919 36.28)",
+          "oklch(83.6% 0.0919 36.28)",
+          "oklch(95.0% 0.0919 36.28)"
+        ]
+      },
+      "error-ground": {
+        "role": "neutral",
+        "displayName": "Pale peach error ground",
+        "tonalRamp": [
+          "oklch(15.0% 0.0273 56.74)",
+          "oklch(26.4% 0.0273 56.74)",
+          "oklch(37.9% 0.0273 56.74)",
+          "oklch(49.3% 0.0273 56.74)",
+          "oklch(60.7% 0.0273 56.74)",
+          "oklch(72.1% 0.0273 56.74)",
+          "oklch(83.6% 0.0273 56.74)",
+          "oklch(95.0% 0.0273 56.74)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Sculptural display",
+        "purpose": "Hero headline."
+      },
+      "headline": {
+        "displayName": "Editorial headline",
+        "purpose": "Section headings; local compositions adapt the size."
+      },
+      "title": {
+        "displayName": "Product title",
+        "purpose": "Open product names."
+      },
+      "body": {
+        "displayName": "Quiet body",
+        "purpose": "Supporting detail and explanation."
+      },
+      "label": {
+        "displayName": "Functional label",
+        "purpose": "Navigation, actions, form labels, and filters."
+      }
+    },
+    "shadows": [
+      {
+        "name": "toast-ambient",
+        "value": "0 6px 24px rgba(75, 53, 42, 0.15)",
+        "purpose": "Transient feedback."
+      },
+      {
+        "name": "dialog-ambient",
+        "value": "0 15px 60px rgba(50, 30, 20, 0.16)",
+        "purpose": "Dialog elevation."
+      }
+    ],
+    "motion": [
+      {
+        "name": "action-hover",
+        "value": "background 0.2s",
+        "purpose": "Solid action hover; disabled under reduced motion."
+      },
+      {
+        "name": "atelier-settle",
+        "value": "1.4s cubic-bezier(0.16, 1, 0.3, 1) both",
+        "purpose": "One-shot hero image settle from scale(1.035) and brightness(0.96) to scale(1) and brightness(1); disabled under reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "wide",
+        "value": "1600px"
+      },
+      {
+        "name": "compact",
+        "value": "1000px"
+      },
+      {
+        "name": "mobile",
+        "value": "700px"
+      }
+    ],
+    "focus": {
+      "value": "2px solid var(--cocoa); outline-offset: 5px",
+      "purpose": "Global focus-visible treatment."
+    },
+    "backdrop": {
+      "value": "rgba(45, 30, 23, 0.45)",
+      "purpose": "Warm modal scrim."
+    },
+    "tonalRampNote": "Synthesized OKLCH ramps are panel exploration metadata, not additional shipped palette tokens."
+  },
+  "components": [
+    {
+      "name": "Solid action",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Cocoa action with paper text and a directional SVG.",
+      "html": "<button class=\"ds-solid\">Explore the collection <svg width=\"17\" height=\"17\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14m-7-7 7 7-7 7\"/></svg></button>",
+      "css": ".ds-solid{font-family:var(--body,Manrope,sans-serif);font-size:12px;font-weight:400;display:inline-flex;align-items:center;justify-content:space-between;gap:28px;background:var(--cocoa,#4b352a);color:var(--paper,#faf7f2);border:1px solid var(--cocoa,#4b352a);border-radius:0;padding:17px 24px;min-height:52px;line-height:1.5;cursor:pointer;transition:background .2s}.ds-solid:hover{background:#6a4736}.ds-solid:focus-visible{outline:2px solid var(--cocoa,#4b352a);outline-offset:5px}.ds-solid:disabled{opacity:.5;cursor:not-allowed}@media(prefers-reduced-motion:reduce){.ds-solid{transition:none}}"
+    },
+    {
+      "name": "Text action",
+      "kind": "button",
+      "refersTo": "button-text",
+      "description": "An understated rose seam and SVG arrow.",
+      "html": "<button class=\"ds-text\">Find your ritual <svg width=\"17\" height=\"17\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14m-7-7 7 7-7 7\"/></svg></button>",
+      "css": ".ds-text{font-family:var(--body,Manrope,sans-serif);font-size:12px;font-weight:400;display:inline-flex;gap:20px;align-items:center;background:none;color:var(--cocoa,#4b352a);border:0;border-bottom:1px solid var(--rose,#b07e60);border-radius:0;padding:8px 0;cursor:pointer}.ds-text:hover{color:#8a5139}.ds-text:focus-visible{outline:2px solid var(--cocoa,#4b352a);outline-offset:5px}"
+    },
+    {
+      "name": "Icon action",
+      "kind": "button",
+      "refersTo": "button-icon",
+      "description": "Transparent square utility action with an inline SVG.",
+      "html": "<button class=\"ds-icon\" aria-label=\"Search\"><svg width=\"19\" height=\"19\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" aria-hidden=\"true\"><circle cx=\"11\" cy=\"11\" r=\"8\"/><path d=\"m21 21-4.3-4.3\"/></svg></button>",
+      "css": ".ds-icon{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;padding:0;background:transparent;border:0;border-radius:0;color:var(--cocoa,#4b352a);cursor:pointer}.ds-icon:hover{color:#8a5139}.ds-icon:focus-visible{outline:2px solid var(--cocoa,#4b352a);outline-offset:5px}"
+    },
+    {
+      "name": "Email field",
+      "kind": "input",
+      "refersTo": "input-email",
+      "description": "Visible label and a single cocoa bottom seam.",
+      "html": "<label class=\"ds-label\" for=\"ds-email\">Your email address</label><div class=\"ds-email-row\"><input class=\"ds-email\" id=\"ds-email\" type=\"email\" placeholder=\"Enter your email\"><button class=\"ds-submit\" aria-label=\"Preview newsletter sign-up\"><svg width=\"17\" height=\"17\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14m-7-7 7 7-7 7\"/></svg></button></div>",
+      "css": ".ds-label{font-family:var(--body,Manrope,sans-serif);font-size:12px;font-weight:400;display:block;color:var(--cocoa,#4b352a);margin-bottom:12px}.ds-email-row{display:flex;align-items:center;border-bottom:1px solid var(--cocoa,#4b352a)}.ds-email{font-family:var(--body,Manrope,sans-serif);font-size:13px;background:transparent;width:100%;min-width:0;border:0;border-radius:0;color:var(--cocoa,#4b352a);padding:14px 0;caret-color:var(--cocoa,#4b352a)}.ds-email::placeholder{color:var(--muted,#795e50);opacity:1}.ds-submit{border:0;background:transparent;color:var(--cocoa,#4b352a);min-height:44px;min-width:44px;display:grid;place-items:center;cursor:pointer}.ds-email:focus-visible{outline:2px solid var(--cocoa,#4b352a);outline-offset:5px}.ds-submit:focus-visible{outline:2px solid var(--cocoa,#4b352a);outline-offset:5px}"
+    },
+    {
+      "name": "Category filters",
+      "kind": "chip",
+      "refersTo": "filter",
+      "description": "API category names in unfilled wrapping controls; pressed state has a cocoa seam.",
+      "html": "<div class=\"ds-filters\" role=\"group\" aria-label=\"Filter collection\"><button aria-pressed=\"true\">All</button><button aria-pressed=\"false\">Lip Care</button></div>",
+      "css": ".ds-filters{display:flex;flex-wrap:wrap;gap:19px;align-items:center}.ds-filters button{font-family:var(--body,Manrope,sans-serif);font-size:12px;font-weight:400;border:0;border-bottom:1px solid transparent;background:transparent;padding:12px 5px;min-width:44px;color:var(--muted,#795e50);cursor:pointer}.ds-filters button[aria-pressed=true]{color:var(--cocoa,#4b352a);border-color:var(--cocoa,#4b352a)}.ds-filters button:focus-visible{outline:2px solid var(--cocoa,#4b352a);outline-offset:5px}@media(max-width:700px){.ds-filters{gap:15px}.ds-filters button{padding-top:11px;padding-bottom:11px}}"
+    },
+    {
+      "name": "Quiet navigation",
+      "kind": "nav",
+      "description": "Small sans-serif links and a sculptural serif wordmark.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Sample navigation\"><a href=\"#collection\">The collection</a><a class=\"ds-wordmark\" href=\"#home\" aria-label=\"Vee home\">Vee</a><a href=\"#world\">Our world</a></nav>",
+      "css": ".ds-nav{display:flex;justify-content:space-between;align-items:center;gap:31px;background:var(--paper,#faf7f2);color:var(--cocoa,#4b352a);padding:20px 5.5%}.ds-nav a{font-family:var(--body,Manrope,sans-serif);font-size:12px;font-weight:400;color:inherit;text-decoration:none;text-underline-offset:.35em}.ds-nav a:hover{text-decoration:underline}.ds-nav .ds-wordmark{font-family:var(--display,\"Bodoni Moda\",Georgia,serif);font-size:58px;letter-spacing:-.07em;line-height:1;padding-right:.07em}.ds-nav a:focus-visible{outline:2px solid var(--cocoa,#4b352a);outline-offset:5px}"
+    },
+    {
+      "name": "Open product arrangement",
+      "kind": "card",
+      "description": "API product name and price with a stock-aware preview add action; supplied photography occupies a separate unboxed surface.",
+      "html": "<article class=\"ds-product\"><div><button class=\"ds-product-name\">Lip Balm</button><p>EGP 170.00</p></div><button class=\"ds-add\" aria-label=\"Add lip balm to preview bag\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" aria-hidden=\"true\"><path d=\"M12 5v14M5 12h14\"/></svg></button></article>",
+      "css": ".ds-product{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;color:var(--cocoa,#4b352a);background:transparent;margin-top:18px}.ds-product-name{font-family:var(--display,\"Bodoni Moda\",Georgia,serif);font-size:25px;font-weight:400;color:inherit;border:0;background:transparent;padding:0;cursor:pointer}.ds-product-name:hover{text-decoration:underline;text-underline-offset:5px}.ds-product p{font-family:var(--body,Manrope,sans-serif);font-size:13px;color:var(--cocoa,#4b352a);font-variant-numeric:tabular-nums;line-height:1.6;margin:6px 0 0}.ds-add{width:39px;height:39px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid var(--line,#d5c5b7);border-radius:0;background:transparent;color:inherit;padding:0;cursor:pointer}.ds-add:hover{color:#8a5139}.ds-add:focus-visible{outline:2px solid var(--cocoa,#4b352a);outline-offset:5px}.ds-product-name:focus-visible{outline:2px solid var(--cocoa,#4b352a);outline-offset:5px}.ds-add:disabled{opacity:.5;cursor:not-allowed}"
+    },
+    {
+      "name": "Account field",
+      "kind": "input",
+      "refersTo": "input-account",
+      "description": "Visible label and square ivory field inside the account dialog; disabled through the busy form fieldset.",
+      "html": "<label class=\"ds-field-label\">Email address<input class=\"ds-field\" type=\"email\" autocomplete=\"email\" required></label>",
+      "css": ".ds-field-label{display:flex;flex-direction:column;gap:9px;margin-bottom:20px;font-size:12px;color:var(--cocoa,#4b352a)}.ds-field{width:100%;min-width:0;padding:12px 10px;border:1px solid var(--line,#d5c5b7);background:var(--ivory,#f5f0e9);color:var(--cocoa,#4b352a);font-size:14px;border-radius:0}.ds-field:focus-visible{outline:2px solid var(--cocoa,#4b352a);outline-offset:5px}.ds-field-label,.ds-field{font-family:var(--body,Manrope,sans-serif)}.ds-field{min-height:44px}"
+    },
+    {
+      "name": "Review field",
+      "kind": "input",
+      "refersTo": "input-review",
+      "description": "Labeled, vertically resizable review textarea; submitted in the native product dialog.",
+      "html": "<label class=\"ds-field-label\">Your review<textarea class=\"ds-field\" rows=\"4\" required></textarea></label>",
+      "css": ".ds-field-label{display:flex;flex-direction:column;gap:9px;margin-bottom:20px;font-size:12px;color:var(--cocoa,#4b352a)}.ds-field{width:100%;min-width:0;padding:12px 10px;border:1px solid var(--line,#d5c5b7);background:var(--ivory,#f5f0e9);color:var(--cocoa,#4b352a);font-size:14px;border-radius:0}.ds-field:focus-visible{outline:2px solid var(--cocoa,#4b352a);outline-offset:5px}.ds-field-label{font-family:var(--body,Manrope,sans-serif)}.ds-field{resize:vertical;line-height:1.7}"
+    },
+    {
+      "name": "Form feedback",
+      "kind": "custom",
+      "refersTo": "form-error",
+      "description": "Warm alert for failures and ivory status for confirmations or session notices, shared by account and review forms.",
+      "html": "<p class=\"ds-feedback ds-error\" role=\"alert\">Please check your details and try again.</p><p class=\"ds-feedback ds-message\" role=\"status\">Your details have been updated.</p>",
+      "css": ".ds-feedback{font-family:var(--body,Manrope,sans-serif);padding:14px 16px;font-size:12px;line-height:1.7;margin:0 0 22px;overflow-wrap:anywhere}.ds-error{color:#743625;background:#f1ded1}.ds-message{background:var(--ivory,#f5f0e9);color:var(--cocoa,#4b352a)}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Botanical atelier",
+    "overview": "Vee's luxury feels rich, comforting, and unhurried. Warm paper, peach-blush packaging, copper and rose-gold details, limestone, amber vessels, and dry botanicals bring nature into a sunlit atelier. The user-confirmed rejection of green applies to the authored interface palette and concept imagery. Actual catalog photography is displayed as supplied by the backend; the user-provided Lip Balm photo includes green leaves.\n\nSculptural serif lettering and broad photography carry the atmosphere. Small, quiet controls keep collection exploration available, while fine seams and generous spacing give objects room to breathe. This document records the implemented visual system; the homepage's composition remains in its surface contract. Hero and ritual imagery remain labeled concepts. Product photos, copy, categories, prices, currency, stock, and reviews come from the API; the bag and checkout remain previews.\n",
+    "keyCharacteristics": [
+      "Warm mineral neutrals with peach-blush and copper accents.",
+      "Sculptural serif headings paired with quiet sans-serif controls.",
+      "Unboxed photography, square geometry, and fine seams.",
+      "Deliberate spaciousness and restrained motion."
+    ],
+    "rules": [
+      {
+        "name": "The Dry Botanical Rule",
+        "body": "Keep authored nature warm and mineral: limestone, amber, dry stems, peach-blush, and copper or rose gold. Do not introduce green in the interface palette or concept imagery. Display backend-supplied product photography faithfully, including its existing foliage.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two Voices Rule",
+        "body": "Use Bodoni Moda for brand and editorial emphasis; use Manrope for actions, navigation, and supporting explanation. Keep display and editorial headings at weight 400.",
+        "section": "typography"
+      },
+      {
+        "name": "The Quiet Surface Rule",
+        "body": "Let tonal grounds, imagery, and fine seams define ordinary surfaces. Reserve ambient shadows for overlays and transient feedback.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** preserve the Dry Botanical Rule in authored concept imagery and interface color, while displaying supplied product photos faithfully.",
+      "**Do** pair sculptural Bodoni Moda headings with quiet Manrope controls.",
+      "**Do** use open photographic arrangements, square geometry, and fine seams.",
+      "**Do** keep keyboard focus visible and honor reduced-motion preferences.",
+      "**Do** label hero and ritual art as concepts, use API catalog facts, and keep bag and checkout preview disclosures visible."
+    ],
+    "donts": [
+      "**Don't** add green tones or green foliage to the authored interface palette or concept imagery; supplied product photos retain their original colors.",
+      "**Don't** give ordinary product arrangements overlay-style shadows.",
+      "**Don't** introduce pill-shaped controls into the square component grammar.",
+      "**Don't** repeat the hero's settle animation continuously.",
+      "**Don't** convert temporary preview disclosures into a reusable promotional eyebrow or kicker style."
+    ]
+  }
+}

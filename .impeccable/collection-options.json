@@ -1,0 +1,60 @@
+{
+  "title": "Choose the collection layout",
+  "question": "Category browsing will lead and copy will stay quiet. Which arrangement feels right for Vee?",
+  "options": [
+    {
+      "id": "assigned",
+      "label": "Category chapters",
+      "kicker": "THE ROLL",
+      "thesis": "The whole collection unfolds as a sequence of category galleries.",
+      "palette": ["#faf7f2", "#f5f0e9", "#ddbaa9", "#4b352a"],
+      "materials": ["warm paper", "fine mineral seams", "supplied product photographs"],
+      "viewport": "A quiet title and category directory lead into the first open product grid; every category follows down the page.",
+      "risk": "Longer scrolling as the catalog grows; a sticky category directory keeps orientation.",
+      "wireframe": {"cols": 12, "rows": 10, "regions": [
+        {"label": "brand navigation", "x": 0, "y": 0, "w": 12, "h": 1},
+        {"label": "collection title", "x": 1, "y": 1, "w": 5, "h": 2},
+        {"label": "category directory", "x": 1, "y": 3, "w": 10, "h": 1, "accent": true},
+        {"label": "category heading", "x": 1, "y": 4, "w": 4, "h": 1},
+        {"label": "product photography", "x": 1, "y": 5, "w": 3, "h": 5},
+        {"label": "product photography", "x": 5, "y": 5, "w": 3, "h": 5},
+        {"label": "product photography", "x": 9, "y": 5, "w": 2, "h": 5}
+      ]}
+    },
+    {
+      "id": "directory",
+      "label": "Category directory",
+      "thesis": "A permanent category index sits beside one focused product gallery.",
+      "palette": ["#faf7f2", "#f5f0e9", "#ddbaa9", "#4b352a"],
+      "materials": ["warm paper", "fine mineral seams", "supplied product photographs"],
+      "viewport": "The left column lists categories and counts; the right changes to the selected category's product grid.",
+      "risk": "It is highly scannable but gives less sense of the complete collection at once.",
+      "wireframe": {"cols": 12, "rows": 10, "regions": [
+        {"label": "brand navigation", "x": 0, "y": 0, "w": 12, "h": 1},
+        {"label": "collection title", "x": 1, "y": 1, "w": 6, "h": 2},
+        {"label": "category index", "x": 1, "y": 3, "w": 2, "h": 6, "accent": true},
+        {"label": "product photography", "x": 4, "y": 3, "w": 3, "h": 6},
+        {"label": "product photography", "x": 8, "y": 3, "w": 3, "h": 6}
+      ]}
+    },
+    {
+      "id": "focused",
+      "label": "Focused category",
+      "thesis": "One category at a time receives an expansive, editorial product display.",
+      "palette": ["#faf7f2", "#f5f0e9", "#ddbaa9", "#4b352a"],
+      "materials": ["warm paper", "fine mineral seams", "supplied product photographs"],
+      "viewport": "Large category name and selected product image lead; compact category controls reveal other products without a long scroll.",
+      "risk": "The emphasis can feel sparse while Vee has only a few catalog items.",
+      "wireframe": {"cols": 12, "rows": 10, "regions": [
+        {"label": "brand navigation", "x": 0, "y": 0, "w": 12, "h": 1},
+        {"label": "category controls", "x": 1, "y": 1, "w": 10, "h": 1, "accent": true},
+        {"label": "category name", "x": 1, "y": 3, "w": 4, "h": 2},
+        {"label": "selected product image", "x": 6, "y": 2, "w": 5, "h": 7},
+        {"label": "product details", "x": 1, "y": 6, "w": 4, "h": 3}
+      ]}
+    }
+  ],
+  "reroll": true,
+  "steer": true,
+  "buildPath": {"value": "code", "toggle": true}
+}
