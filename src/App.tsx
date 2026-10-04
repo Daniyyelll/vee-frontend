@@ -146,7 +146,7 @@ function App() {
 
   useEffect(() => {
     if (!notice) return;
-    const timer = window.setTimeout(() => setNotice(""), 3500);
+    const timer = window.setTimeout(() => setNotice(""), 5000);
     return () => window.clearTimeout(timer);
   }, [notice]);
 
@@ -237,7 +237,7 @@ function App() {
         Skip to content
       </a>
       <div className="preview-ribbon">
-        The Vee collection <span>—</span> cash on delivery.
+        The Vee collection.
       </div>
       <header
         className={`site-header ${headerVisible ? "" : "header-hidden"}`}
@@ -630,7 +630,6 @@ function App() {
         </div>
         <div className="footer-bottom">
           <span>© {new Date().getFullYear()} Vee</span>
-          <span>A luxury cosmetics storefront concept.</span>
           <a href="#main">
             Back to top <ArrowRight size={13} className="up-arrow" />
           </a>
@@ -805,7 +804,14 @@ function App() {
               )}
             </div>
           )}
-          {panel === "account" && <AccountPanel />}
+          {panel === "account" && (
+            <AccountPanel
+              onSignedIn={() => {
+                setPanel(null);
+                setNotice("Signed in.");
+              }}
+            />
+          )}
           {detail && (
             <ProductPanel
               key={detail.id}

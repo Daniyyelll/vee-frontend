@@ -18,14 +18,15 @@ const titles: Record<Mode, string> = {
 
 export default function AccountPanel({
   showProfileLink = true,
+  onSignedIn,
 }: {
   showProfileLink?: boolean;
+  onSignedIn?: () => void;
 }) {
   const session = useSession();
   const [mode, setMode] = useState<Mode>(
     window.location.pathname === "/reset-password" ? "reset" : "login",
   );
-  const [email, setEmail] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -75,8 +76,7 @@ export default function AccountPanel({
         case "login":
           await session.signIn(value("email").trim(), password);
           if (alive.current) {
-            setMode("profile");
-            setSuccess("Welcome back. You’re signed in.");
+            onSignedIn?.();
           }
           break;
         case "register":
@@ -87,9 +87,8 @@ export default function AccountPanel({
             value("phone").trim() || null,
           );
           if (alive.current) {
-            setEmail(value("email").trim());
-            setMode("login");
-            setSuccess("Your account is ready. Sign in to continue.");
+            await session.signIn(value("email").trim(), password);
+            if (alive.current) onSignedIn?.();
           }
           break;
         case "forgot":
@@ -229,7 +228,7 @@ export default function AccountPanel({
                 type="email"
                 required
                 autoComplete="email"
-                defaultValue={email}
+                defaultValue=""
               />
             </label>
           )}

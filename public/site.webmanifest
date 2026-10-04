@@ -1,0 +1,36 @@
+{
+  "name": "Vee — A moment, just for you.",
+  "short_name": "Vee",
+  "description": "Explore Vee, a luxury cosmetics storefront inspired by the quiet beauty of nature.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f4f0e7",
+  "theme_color": "#f4f0e7",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": [
+    "beauty",
+    "shopping"
+  ],
+  "lang": "en",
+  "dir": "ltr"
+}

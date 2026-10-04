@@ -16,17 +16,24 @@ const buyer = {
   address: null,
   phone: null,
 };
-const renderAccount = () =>
+const renderAccount = (onSignedIn?: () => void) =>
   render(
     <SessionProvider>
-      <AccountPanel />
+      <AccountPanel onSignedIn={onSignedIn} />
     </SessionProvider>,
   );
 
-it("keeps password mismatch local and registers only the customer payload", async () => {
+it("keeps password mismatch local and signs in after registering", async () => {
   const api = vi.spyOn(storeApi, "register").mockResolvedValue(buyer);
+  const signIn = vi.spyOn(storeApi, "login").mockResolvedValue({
+    token: "header.payload.signature",
+    token_type: "bearer",
+    user: buyer,
+  });
+  vi.spyOn(storeApi, "me").mockResolvedValue(buyer);
+  const onSignedIn = vi.fn();
   const interaction = userEvent.setup();
-  renderAccount();
+  renderAccount(onSignedIn);
   await interaction.click(
     screen.getByRole("button", { name: "Create an account" }),
   );
@@ -61,7 +68,8 @@ it("keeps password mismatch local and registers only the customer payload", asyn
       null,
     ),
   );
-  expect(await screen.findByRole("button", { name: "Sign in" })).toBeTruthy();
+  expect(signIn).toHaveBeenCalledWith(buyer.email, "example-password");
+  expect(onSignedIn).toHaveBeenCalledOnce();
 });
 
 it("shows the same reset instructions for an unknown account without sending another email", async () => {
