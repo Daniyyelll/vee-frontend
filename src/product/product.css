@@ -1,0 +1,242 @@
+.product-page {
+  min-height: 70vh;
+  padding: 28px 5.5% 110px;
+  background: var(--paper);
+}
+
+.product-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 28px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.product-breadcrumb a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.product-breadcrumb a:hover,
+.product-breadcrumb a:focus-visible {
+  color: var(--cocoa);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.product-stage,
+.product-page-loading {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(290px, 0.92fr);
+  gap: clamp(42px, 7vw, 128px);
+  max-width: 1280px;
+  margin: 30px auto 76px;
+}
+
+.product-media {
+  min-width: 0;
+  background: var(--ivory);
+}
+
+.product-page-image {
+  display: block;
+  width: 100%;
+  min-height: 560px;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.product-purchase {
+  align-self: center;
+  max-width: 440px;
+  padding: 34px 0;
+}
+
+.product-purchase h1,
+.product-page-message h1 {
+  max-width: 10ch;
+  font-family: var(--display);
+  font-size: clamp(48px, 5vw, 78px);
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  line-height: 0.98;
+}
+
+.product-page-price {
+  margin-top: 24px;
+  color: var(--cocoa);
+  font-size: 16px;
+  font-variant-numeric: tabular-nums;
+}
+
+.product-page-description {
+  max-width: 55ch;
+  margin-top: 30px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.9;
+  white-space: pre-wrap;
+}
+
+.product-page-stock {
+  margin-top: 30px;
+  font-size: 12px;
+}
+
+.product-page-stock::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 9px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.product-page-stock.in-stock {
+  color: var(--cocoa);
+}
+
+.product-page-stock.out-of-stock {
+  color: #743625;
+}
+
+.product-page-add {
+  display: flex;
+  width: min(100%, 360px);
+  justify-content: space-between;
+  margin-top: 18px;
+}
+
+.product-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 24px;
+  color: var(--muted);
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.product-back-link:hover,
+.product-back-link:focus-visible {
+  color: var(--cocoa);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.product-page .reviews-panel {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 42px 0 0;
+}
+
+.product-page-loading {
+  min-height: 560px;
+}
+
+.product-image-skeleton,
+.product-copy-skeleton span {
+  display: block;
+  background: var(--ivory);
+}
+
+.product-image-skeleton {
+  min-height: 560px;
+}
+
+.product-copy-skeleton {
+  align-self: center;
+}
+
+.product-copy-skeleton span:nth-child(1) {
+  width: min(100%, 320px);
+  height: 72px;
+}
+
+.product-copy-skeleton span:nth-child(2) {
+  width: 110px;
+  height: 18px;
+  margin-top: 30px;
+}
+
+.product-copy-skeleton span:nth-child(3) {
+  width: min(100%, 360px);
+  height: 120px;
+  margin-top: 32px;
+}
+
+.product-page-message {
+  max-width: 620px;
+  min-height: 55vh;
+  padding: 15vh 0;
+}
+
+.product-page-message p {
+  max-width: 55ch;
+  margin-top: 26px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+.product-page-message .solid-link,
+.product-page-message .text-link {
+  margin-top: 28px;
+}
+
+@media (min-width: 1600px) {
+  .product-page {
+    padding-right: 8%;
+    padding-left: 8%;
+  }
+}
+
+@media (max-width: 700px) {
+  .product-page {
+    padding: 19px 24px 72px;
+  }
+
+  .product-stage,
+  .product-page-loading {
+    display: block;
+    margin-top: 22px;
+    margin-bottom: 50px;
+  }
+
+  .product-page-image,
+  .product-image-skeleton {
+    min-height: 0;
+    aspect-ratio: 4 / 4.6;
+  }
+
+  .product-purchase {
+    padding: 36px 0 0;
+  }
+
+  .product-purchase h1,
+  .product-page-message h1 {
+    font-size: clamp(48px, 13vw, 68px);
+  }
+
+  .product-page-description {
+    font-size: 13px;
+  }
+
+  .product-page-add {
+    width: 100%;
+  }
+
+  .product-page .reviews-panel {
+    padding-top: 32px;
+  }
+
+  .product-copy-skeleton {
+    padding-top: 36px;
+  }
+
+  .product-page-message {
+    padding: 12vh 0;
+  }
+}

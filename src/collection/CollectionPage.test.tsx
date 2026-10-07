@@ -40,7 +40,6 @@ afterEach(() => {
 it("filters the live catalog by category and restores selection from the URL", async () => {
   window.history.replaceState({}, "", "/collection");
   const add = vi.fn();
-  const open = vi.fn();
   const user = userEvent.setup();
   render(
     <CollectionPage
@@ -50,22 +49,23 @@ it("filters the live catalog by category and restores selection from the URL", a
       error=""
       retry={vi.fn()}
       bag={{}}
-      onOpen={open}
       onAdd={add}
     />,
   );
 
-  expect(screen.getByRole("button", { name: "View Lip Balm" })).toBeTruthy();
-  expect(screen.getByRole("button", { name: "View Face Cream" })).toBeTruthy();
+  expect(
+    screen.getByRole("link", { name: "View Lip Balm" }).getAttribute("href"),
+  ).toBe("/products/lip-balm");
+  expect(screen.getByRole("link", { name: "View Face Cream" })).toBeTruthy();
   await user.click(screen.getByRole("button", { name: /Lip Care/ }));
   expect(window.location.search).toBe("?category=lips");
-  expect(screen.queryByRole("button", { name: "View Face Cream" })).toBeNull();
+  expect(screen.queryByRole("link", { name: "View Face Cream" })).toBeNull();
   await user.click(screen.getByRole("button", { name: "Add Lip Balm to bag" }));
   expect(add).toHaveBeenCalledWith(products[0]);
 
   window.history.replaceState({}, "", "/collection?category=skin");
   fireEvent.popState(window);
-  expect(screen.getByRole("button", { name: "View Face Cream" })).toBeTruthy();
+  expect(screen.getByRole("link", { name: "View Face Cream" })).toBeTruthy();
   expect(
     screen.getByRole("button", { name: "Add Face Cream to bag" }),
   ).toHaveProperty("disabled", true);

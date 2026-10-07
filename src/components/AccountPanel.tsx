@@ -31,6 +31,7 @@ export default function AccountPanel({
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const alive = useRef(true);
+  const initialFieldRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
     alive.current = true;
     return () => {
@@ -44,6 +45,12 @@ export default function AccountPanel({
     : mode === "profile" || mode === "password"
       ? "login"
       : mode;
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() =>
+      initialFieldRef.current?.focus(),
+    );
+    return () => window.cancelAnimationFrame(frame);
+  }, [activeMode]);
   function switchMode(next: Mode) {
     setMode(next);
     setError("");
@@ -212,6 +219,8 @@ export default function AccountPanel({
             <label>
               Name
               <input
+                ref={initialFieldRef}
+                data-dialog-autofocus
                 name="name"
                 required
                 maxLength={200}
@@ -224,6 +233,16 @@ export default function AccountPanel({
             <label>
               Email address
               <input
+                ref={
+                  activeMode === "login" || activeMode === "forgot"
+                    ? initialFieldRef
+                    : undefined
+                }
+                data-dialog-autofocus={
+                  activeMode === "login" || activeMode === "forgot"
+                    ? true
+                    : undefined
+                }
                 name="email"
                 type="email"
                 required
@@ -261,6 +280,8 @@ export default function AccountPanel({
             <label>
               Reset code
               <input
+                ref={initialFieldRef}
+                data-dialog-autofocus
                 name="code"
                 required
                 minLength={8}
@@ -276,6 +297,8 @@ export default function AccountPanel({
             <label>
               Current password
               <input
+                ref={initialFieldRef}
+                data-dialog-autofocus
                 name="oldPassword"
                 type="password"
                 required
@@ -368,13 +391,16 @@ export default function AccountPanel({
         <div className="account-links">
           {activeMode === "login" ? (
             <>
-              <button
-                className="text-link"
-                disabled={busy}
-                onClick={() => switchMode("register")}
-              >
-                Create an account
-              </button>
+              <div className="account-create">
+                <span>New customer?</span>
+                <button
+                  className="text-link"
+                  disabled={busy}
+                  onClick={() => switchMode("register")}
+                >
+                  Create an account
+                </button>
+              </div>
               <button
                 className="text-link"
                 disabled={busy}

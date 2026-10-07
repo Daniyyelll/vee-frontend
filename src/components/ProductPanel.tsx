@@ -46,7 +46,9 @@ export default function ProductPanel({
           eager
         />
         <div className="detail-copy">
-          <h2 id="dialog-title">{detail.productName}</h2>
+          <h2 id="dialog-title" tabIndex={-1} data-dialog-autofocus>
+            {detail.productName}
+          </h2>
           <p className="product-price">{formatPrice(detail)}</p>
           <p className="product-description">{detail.description}</p>
           {loading ? (

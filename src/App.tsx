@@ -20,17 +20,27 @@ import { saveReceipt } from "./checkout/receipt";
 import CollectionPage from "./collection/CollectionPage";
 import AccountPanel from "./components/AccountPanel";
 import ProductCard from "./components/ProductCard";
-import ProductPanel from "./components/ProductPanel";
 import ProductImage from "./components/ProductImage";
 import QuantityInput from "./components/QuantityInput";
 import { navigateTo } from "./navigation";
 import ProfilePage from "./profile/ProfilePage";
+import ProductPage from "./product/ProductPage";
 
 import "@fontsource/bodoni-moda/latin-400.css";
 import "@fontsource/bodoni-moda/latin-400-italic.css";
 import "@fontsource/manrope/latin-400.css";
 import "@fontsource/manrope/latin-500.css";
 import "@fontsource/manrope/latin-600.css";
+
+function productSlugFromPath(path: string) {
+  const match = path.match(/^\/products\/([^/]+)$/);
+  if (!match) return null;
+  try {
+    return decodeURIComponent(match[1]);
+  } catch {
+    return null;
+  }
+}
 
 function App() {
   const [path, setPath] = useState(window.location.pathname);
@@ -40,9 +50,10 @@ function App() {
   const [category, setCategory] = useState<string>("All");
   const [menuOpen, setMenuOpen] = useState(false);
   const [headerVisible, setHeaderVisible] = useState(true);
-  const [panel, setPanel] = useState<"search" | "bag" | "account" | null>(
+  const [panel, setPanel] = useState<"bag" | "account" | null>(
     window.location.pathname === "/reset-password" ? "account" : null,
   );
+  const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [bag, setBag] = useState<Record<string, number>>(() => {
     try {
@@ -66,11 +77,19 @@ function App() {
     }
   });
   const [notice, setNotice] = useState("");
-  const [detail, setDetail] = useState<Product | null>(null);
+  const [pageProduct, setPageProduct] = useState<Product | null>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
   const triggerRef = useRef<HTMLElement | null>(null);
+  const productSlug = productSlugFromPath(path);
   const bagCount = Object.values(bag).reduce((sum, qty) => sum + qty, 0);
-  const bagProducts = products.filter((product) => bag[product.id] > 0);
+  const productsById = new Map(
+    products.map((product) => [product.id, product]),
+  );
+  if (pageProduct) productsById.set(pageProduct.id, pageProduct);
+  const bagProducts = Object.keys(bag)
+    .map((id) => productsById.get(id))
+    .filter((product): product is Product => Boolean(product));
   const subtotalCurrency = bagProducts[0]?.currency;
   const bagSubtotal =
     subtotalCurrency &&
@@ -106,6 +125,10 @@ function App() {
     window.addEventListener("popstate", updatePath);
     return () => window.removeEventListener("popstate", updatePath);
   }, []);
+
+  useEffect(() => {
+    if (!productSlug) setPageProduct(null);
+  }, [productSlug]);
 
   useEffect(() => {
     let previousY = window.scrollY;
@@ -151,12 +174,23 @@ function App() {
   }, [notice]);
 
   useEffect(() => {
+    if (searchOpen) searchInputRef.current?.focus();
+  }, [searchOpen]);
+
+  useEffect(() => {
     const dialog = dialogRef.current;
-    if (panel || detail) {
+    if (panel) {
       if (!dialog?.open)
         triggerRef.current = document.activeElement as HTMLElement;
-      dialog?.showModal();
-      document.body.style.overflow = "hidden";
+      const wantsModal = panel !== "bag";
+      if (dialog?.open && dialog.matches(":modal") !== wantsModal)
+        dialog.close();
+      if (!dialog?.open) {
+        if (wantsModal) dialog?.showModal();
+        else dialog?.show();
+      }
+      dialog?.querySelector<HTMLElement>("[data-dialog-autofocus]")?.focus();
+      document.body.style.overflow = wantsModal ? "hidden" : "";
     } else {
       dialog?.close();
       document.body.style.overflow = "";
@@ -165,11 +199,37 @@ function App() {
     return () => {
       document.body.style.overflow = "";
     };
-  }, [panel, detail]);
+  }, [panel]);
+
+  useEffect(() => {
+    if (panel !== "bag") return;
+    const closeBag = (event: PointerEvent) => {
+      const target = event.target;
+      if (!(target instanceof Node)) return;
+      if (
+        dialogRef.current?.contains(target) ||
+        triggerRef.current?.contains(target)
+      )
+        return;
+      setPanel(null);
+    };
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setPanel(null);
+    };
+    document.addEventListener("pointerdown", closeBag);
+    document.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.removeEventListener("pointerdown", closeBag);
+      document.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [panel]);
 
   function closeDialog() {
     setPanel(null);
-    setDetail(null);
+  }
+  function closeSearch() {
+    setSearchOpen(false);
+    setQuery("");
   }
   function addToBag(product: Product) {
     if (product.stockQuantity === 0) return;
@@ -181,6 +241,7 @@ function App() {
       ),
     }));
     setNotice(`${product.productName} added to your bag`);
+    setPanel("bag");
   }
   function changeQuantity(id: string, delta: number) {
     setBag((current) => {
@@ -236,11 +297,11 @@ function App() {
       <a className="skip-link" href="#main">
         Skip to content
       </a>
-      <div className="preview-ribbon">
-        The Vee collection.
-      </div>
+      <div className="preview-ribbon">The Vee collection.</div>
       <header
-        className={`site-header ${headerVisible ? "" : "header-hidden"}`}
+        className={`site-header ${headerVisible ? "" : "header-hidden"} ${
+          menuOpen ? "menu-open" : ""
+        } ${searchOpen ? "search-open" : ""}`}
         onFocusCapture={() => setHeaderVisible(true)}
       >
         <nav aria-label="Main navigation" className="desktop-nav">
@@ -252,9 +313,9 @@ function App() {
             The collection
           </a>
           <a
-            href={path === "/collection" ? "/#philosophy" : "#philosophy"}
+            href={path === "/" ? "#philosophy" : "/#philosophy"}
             onClick={(event) => {
-              if (path === "/collection") navigateTo(event, "/#philosophy");
+              if (path !== "/") navigateTo(event, "/#philosophy");
             }}
           >
             Our world
@@ -304,10 +365,7 @@ function App() {
             <button
               className="icon-button"
               aria-label="Sign in or create an account"
-              onClick={() => {
-                setDetail(null);
-                setPanel("account");
-              }}
+              onClick={() => setPanel("account")}
             >
               <UserRound size={19} />
             </button>
@@ -315,7 +373,16 @@ function App() {
           <button
             className="icon-button"
             aria-label="Search the collection"
-            onClick={() => setPanel("search")}
+            aria-expanded={searchOpen}
+            aria-controls="header-search"
+            onClick={() => {
+              if (searchOpen) {
+                searchInputRef.current?.focus();
+                return;
+              }
+              setSearchOpen(true);
+              setHeaderVisible(true);
+            }}
           >
             <Search size={19} />
           </button>
@@ -331,6 +398,70 @@ function App() {
             <span className="bag-count">{bagCount}</span>
           </button>
         </div>
+        {searchOpen && (
+          <form
+            id="header-search"
+            className="header-search"
+            role="search"
+            onSubmit={(event) => event.preventDefault()}
+          >
+            <label className="visually-hidden" htmlFor="collection-search">
+              Search the collection
+            </label>
+            <Search size={18} aria-hidden="true" />
+            <input
+              id="collection-search"
+              ref={searchInputRef}
+              placeholder="Search products or categories"
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+            />
+            <button
+              className="icon-button"
+              type="button"
+              aria-label="Close collection search"
+              onClick={closeSearch}
+            >
+              <X size={19} />
+            </button>
+            {query.trim() && (
+              <div className="header-search-results" aria-live="polite">
+                {loading ? (
+                  <p>Loading the collection…</p>
+                ) : error ? (
+                  <p>{error}</p>
+                ) : results.length ? (
+                  results.map((product) => (
+                    <a
+                      href={`/products/${encodeURIComponent(product.productSlug)}`}
+                      key={product.id}
+                      onClick={(event) => {
+                        closeSearch();
+                        navigateTo(
+                          event,
+                          `/products/${encodeURIComponent(product.productSlug)}`,
+                        );
+                      }}
+                    >
+                      <span>
+                        {product.productName}
+                        <small>
+                          {categories.find(
+                            (item) => item.id === product.categoryId,
+                          )?.categoryName ?? "Collection"}{" "}
+                          · {formatPrice(product)}
+                        </small>
+                      </span>
+                      <ChevronRight size={17} />
+                    </a>
+                  ))
+                ) : (
+                  <p>No products found for “{query}”.</p>
+                )}
+              </div>
+            )}
+          </form>
+        )}
         {menuOpen && (
           <nav
             id="mobile-nav"
@@ -347,10 +478,10 @@ function App() {
               The collection <ArrowRight />
             </a>
             <a
-              href={path === "/collection" ? "/#philosophy" : "#philosophy"}
+              href={path === "/" ? "#philosophy" : "/#philosophy"}
               onClick={(event) => {
                 setMenuOpen(false);
-                if (path === "/collection") navigateTo(event, "/#philosophy");
+                if (path !== "/") navigateTo(event, "/#philosophy");
               }}
             >
               Our world <ArrowRight />
@@ -372,7 +503,15 @@ function App() {
         )}
       </header>
 
-      {path === "/collection" ? (
+      {productSlug ? (
+        <ProductPage
+          slug={productSlug}
+          categories={categories}
+          onAdd={addToBag}
+          onSignIn={() => setPanel("account")}
+          onLoaded={setPageProduct}
+        />
+      ) : path === "/collection" ? (
         <CollectionPage
           categories={categories}
           products={products}
@@ -380,7 +519,6 @@ function App() {
           error={error}
           retry={retry}
           bag={bag}
-          onOpen={setDetail}
           onAdd={addToBag}
         />
       ) : (
@@ -500,7 +638,6 @@ function App() {
                     key={product.id}
                     product={product}
                     bagQuantity={bag[product.id] ?? 0}
-                    onOpen={setDetail}
                     onAdd={addToBag}
                   />
                 ))}
@@ -512,24 +649,8 @@ function App() {
           </section>
 
           <section
-            className="intro"
-            id="philosophy"
-            aria-labelledby="intro-title"
-          >
-            <span className="tiny-wordmark" aria-hidden="true">
-              V
-            </span>
-            <h2 id="intro-title">Take a closer look.</h2>
-            <p>
-              Open a product to see its details, price, and availability. Add
-              your favorites to the bag, then review the final total at
-              checkout.
-            </p>
-          </section>
-
-          <section
             className="ritual"
-            id="ritual"
+            id="philosophy"
             aria-labelledby="ritual-title"
           >
             <figure className="ritual-image">
@@ -561,9 +682,6 @@ function App() {
                 <br className="desktop-break" /> to rediscover the pleasure in
                 the everyday.
               </p>
-              <a className="text-link" href="#collection">
-                Find your ritual <ArrowRight size={16} />
-              </a>
             </div>
           </section>
 
@@ -606,22 +724,17 @@ function App() {
               The collection
             </a>
             <a
-              href={path === "/collection" ? "/#philosophy" : "#philosophy"}
+              href={path === "/" ? "#philosophy" : "/#philosophy"}
               onClick={(event) => {
-                if (path === "/collection") navigateTo(event, "/#philosophy");
+                if (path !== "/") navigateTo(event, "/#philosophy");
               }}
             >
               Our world
             </a>
             <a
-              href={
-                path === "/collection"
-                  ? "/#newsletter-title"
-                  : "#newsletter-title"
-              }
+              href={path === "/" ? "#newsletter-title" : "/#newsletter-title"}
               onClick={(event) => {
-                if (path === "/collection")
-                  navigateTo(event, "/#newsletter-title");
+                if (path !== "/") navigateTo(event, "/#newsletter-title");
               }}
             >
               Stay in touch
@@ -651,7 +764,7 @@ function App() {
       <dialog
         id="store-dialog"
         ref={dialogRef}
-        className={`store-dialog ${detail ? "detail-dialog" : ""} ${panel === "bag" ? "bag-dialog" : ""}`}
+        className={`store-dialog ${panel === "bag" ? "bag-dialog" : ""}`}
         onCancel={closeDialog}
         onClick={(event) => {
           if (event.target === event.currentTarget) closeDialog();
@@ -663,60 +776,10 @@ function App() {
             className="icon-button dialog-close"
             onClick={closeDialog}
             aria-label="Close panel"
+            data-dialog-autofocus={panel === "bag" || undefined}
           >
             <X size={22} />
           </button>
-          {panel === "search" && (
-            <>
-              <h2 id="dialog-title">Find your moment.</h2>
-              <label htmlFor="collection-search">Search the collection</label>
-              <div className="search-field">
-                <Search size={18} />
-                <input
-                  id="collection-search"
-                  placeholder="Search products or categories"
-                  value={query}
-                  onChange={(event) => setQuery(event.target.value)}
-                  autoFocus
-                />
-              </div>
-              <div className="search-results" aria-live="polite">
-                {results.length ? (
-                  results.map((product) => (
-                    <button
-                      key={product.id}
-                      onClick={() => {
-                        setPanel(null);
-                        setDetail(product);
-                      }}
-                    >
-                      <span>
-                        {product.productName}
-                        <small>
-                          {categories.find(
-                            (item) => item.id === product.categoryId,
-                          )?.categoryName ?? "Collection"}{" "}
-                          · {formatPrice(product)}
-                        </small>
-                      </span>
-                      <ChevronRight size={17} />
-                    </button>
-                  ))
-                ) : (
-                  <div className="empty-state">
-                    <p>
-                      {loading
-                        ? "Loading the collection…"
-                        : error || `No products found for “${query}”.`}
-                    </p>
-                    <button className="text-link" onClick={() => setQuery("")}>
-                      Clear your search <ArrowRight size={16} />
-                    </button>
-                  </div>
-                )}
-              </div>
-            </>
-          )}
           {panel === "bag" && (
             <div className="bag-drawer-content">
               <div className="bag-drawer-header">
@@ -809,17 +872,6 @@ function App() {
               onSignedIn={() => {
                 setPanel(null);
                 setNotice("Signed in.");
-              }}
-            />
-          )}
-          {detail && (
-            <ProductPanel
-              key={detail.id}
-              product={detail}
-              onAdd={addToBag}
-              onSignIn={() => {
-                setDetail(null);
-                setPanel("account");
               }}
             />
           )}

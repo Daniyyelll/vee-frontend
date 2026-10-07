@@ -91,3 +91,12 @@ it("shows the same reset instructions for an unknown account without sending ano
   );
   expect(api).toHaveBeenCalledOnce();
 });
+
+it("labels the account-creation action for new customers", () => {
+  renderAccount();
+
+  expect(screen.getByText("New customer?")).toBeTruthy();
+  expect(
+    screen.getByRole("button", { name: "Create an account" }),
+  ).toBeTruthy();
+});

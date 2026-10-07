@@ -11,7 +11,6 @@ type Props = {
   error: string;
   retry: () => void;
   bag: Record<string, number>;
-  onOpen: (product: Product) => void;
   onAdd: (product: Product) => void;
 };
 
@@ -26,7 +25,6 @@ export default function CollectionPage({
   error,
   retry,
   bag,
-  onOpen,
   onAdd,
 }: Props) {
   const [categoryId, setCategoryId] = useState(categoryFromUrl);
@@ -138,7 +136,6 @@ export default function CollectionPage({
                   key={product.id}
                   product={product}
                   bagQuantity={bag[product.id] ?? 0}
-                  onOpen={onOpen}
                   onAdd={onAdd}
                 />
               ))}

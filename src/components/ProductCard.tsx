@@ -1,26 +1,23 @@
 import { ArrowRight, Plus } from "lucide-react";
 import { formatPrice } from "../api/store";
 import type { Product } from "../api/store";
+import { navigateTo } from "../navigation";
 import ProductImage from "./ProductImage";
 
 type Props = {
   product: Product;
   bagQuantity: number;
-  onOpen: (product: Product) => void;
   onAdd: (product: Product) => void;
 };
 
-export default function ProductCard({
-  product,
-  bagQuantity,
-  onOpen,
-  onAdd,
-}: Props) {
+export default function ProductCard({ product, bagQuantity, onAdd }: Props) {
+  const productPath = `/products/${encodeURIComponent(product.productSlug)}`;
   return (
     <article className="product">
-      <button
+      <a
+        href={productPath}
         className="product-image"
-        onClick={() => onOpen(product)}
+        onClick={(event) => navigateTo(event, productPath)}
         aria-label={`View ${product.productName}`}
       >
         <ProductImage src={product.imageUrl} alt={product.productName} />
@@ -30,12 +27,16 @@ export default function ProductCard({
         <span className="product-view">
           Discover <ArrowRight size={17} />
         </span>
-      </button>
+      </a>
       <div className="product-info">
         <div>
-          <button className="product-name" onClick={() => onOpen(product)}>
+          <a
+            className="product-name"
+            href={productPath}
+            onClick={(event) => navigateTo(event, productPath)}
+          >
             {product.productName}
-          </button>
+          </a>
           <p className="product-price">{formatPrice(product)}</p>
         </div>
         <button
