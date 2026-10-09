@@ -98,7 +98,9 @@ it("gives the same reset-link instructions for an unknown account", async () => 
     "textContent",
     "If that email matches an account, a reset link has been sent. Open it to choose a new password.",
   );
-  expect(screen.queryByLabelText("Reset token")).toBeNull();
+  expect(
+    screen.queryByRole("button", { name: "I already have a reset token" }),
+  ).toBeNull();
   expect(api).toHaveBeenCalledOnce();
 });
 
@@ -158,18 +160,45 @@ it("uses the exact token from an email link and clears it from the address bar",
   expect(window.location.pathname).toBe("/");
 });
 
-it("accepts a manually entered reset token without changing its case", async () => {
+it("requests a link when the reset URL has no token, even with a session", async () => {
   window.history.replaceState({}, "", "/reset-password");
-  vi.spyOn(storeApi, "refresh").mockRejectedValue(new Error("No session"));
-  const reset = vi
-    .spyOn(storeApi, "resetPassword")
+  vi.spyOn(storeApi, "refresh").mockResolvedValue({
+    token: "header.payload.signature",
+    token_type: "bearer",
+    user: buyer,
+  });
+  const forgot = vi
+    .spyOn(storeApi, "forgotPassword")
     .mockResolvedValue(undefined);
-  vi.spyOn(storeApi, "logout").mockResolvedValue(undefined);
   const interaction = userEvent.setup();
   renderAccount();
 
-  const token = "aBcD_0123456789-abcdefghijKLMNOPqrstuv";
-  await interaction.type(screen.getByLabelText("Reset token"), token);
+  await waitFor(() =>
+    expect(screen.getByTestId("session-user").textContent).toBe(buyer.email),
+  );
+  expect(screen.getByLabelText("Email address")).toBeTruthy();
+  expect(screen.queryByLabelText("New password")).toBeNull();
+  expect(
+    screen.getByRole("button", { name: "Return to account" }),
+  ).toBeTruthy();
+
+  await interaction.type(screen.getByLabelText("Email address"), buyer.email);
+  await interaction.click(
+    screen.getByRole("button", { name: "Send reset link" }),
+  );
+  await waitFor(() => expect(forgot).toHaveBeenCalledWith(buyer.email));
+});
+
+it("offers a new link after an expired reset link", async () => {
+  const token = "AbCd_0123456789-abcdefghijKLMNOPqrstuv";
+  window.history.replaceState({}, "", "/reset-password?token=" + token);
+  vi.spyOn(storeApi, "refresh").mockRejectedValue(new Error("No session"));
+  vi.spyOn(storeApi, "resetPassword").mockRejectedValue(
+    new ApiError("Reset code is invalid or expired.", 403),
+  );
+  const interaction = userEvent.setup();
+  renderAccount();
+
   await interaction.type(
     screen.getByLabelText("New password"),
     "fresh-password-123",
@@ -181,8 +210,15 @@ it("accepts a manually entered reset token without changing its case", async () 
   await interaction.click(
     screen.getByRole("button", { name: "Reset password" }),
   );
-
-  await waitFor(() =>
-    expect(reset).toHaveBeenCalledWith(token, "fresh-password-123"),
+  expect(await screen.findByRole("alert")).toHaveProperty(
+    "textContent",
+    "This reset link is invalid or has expired. Request another link.",
   );
+
+  await interaction.click(
+    screen.getByRole("button", { name: "Request another reset link" }),
+  );
+  expect(screen.getByLabelText("Email address")).toBeTruthy();
+  expect(screen.queryByLabelText("New password")).toBeNull();
+  expect(window.location.pathname).toBe("/");
 });

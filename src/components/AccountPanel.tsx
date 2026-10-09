@@ -24,14 +24,18 @@ export default function AccountPanel({
   onSignedIn?: () => void;
 }) {
   const session = useSession();
-  const [mode, setMode] = useState<Mode>(
-    window.location.pathname === "/reset-password" ? "reset" : "login",
-  );
   const [linkToken, setLinkToken] = useState(
     () =>
       (window.location.pathname === "/reset-password"
         ? new URLSearchParams(window.location.search).get("token")
         : null) ?? "",
+  );
+  const [mode, setMode] = useState<Mode>(() =>
+    window.location.pathname === "/reset-password"
+      ? linkToken
+        ? "reset"
+        : "forgot"
+      : "login",
   );
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
@@ -55,8 +59,8 @@ export default function AccountPanel({
     );
   }, [linkToken]);
   const activeMode =
-    mode === "reset"
-      ? "reset"
+    mode === "reset" || mode === "forgot"
+      ? mode
       : session.user
         ? mode === "password"
           ? "password"
@@ -138,10 +142,7 @@ export default function AccountPanel({
           }
           break;
         case "reset":
-          await storeApi.resetPassword(
-            linkToken || value("code").trim(),
-            password,
-          );
+          await storeApi.resetPassword(linkToken, password);
           session.signOut();
           if (alive.current) {
             switchMode("login");
@@ -176,7 +177,14 @@ export default function AccountPanel({
       }
       if (activeMode !== "profile") form.reset();
     } catch (cause) {
-      if (alive.current) setError(messageOf(cause));
+      if (alive.current)
+        setError(
+          activeMode === "reset" &&
+            cause instanceof ApiError &&
+            cause.status === 403
+            ? "This reset link is invalid or has expired. Request another link."
+            : messageOf(cause),
+        );
     } finally {
       if (alive.current) setBusy(false);
     }
@@ -185,7 +193,7 @@ export default function AccountPanel({
   return (
     <div className="account-panel">
       <h2 id="dialog-title">{titles[activeMode]}</h2>
-      {session.user && activeMode !== "reset" ? (
+      {session.user && activeMode !== "reset" && activeMode !== "forgot" ? (
         <>
           <p className="account-email">{session.user.email}</p>
           <div
@@ -212,9 +220,7 @@ export default function AccountPanel({
       ) : (
         <p className="form-intro">
           {activeMode === "reset"
-            ? linkToken
-              ? "Choose a new password to finish resetting your account."
-              : "Enter the reset token from your email and choose a new password."
+            ? "Choose a new password to finish resetting your account."
             : activeMode === "forgot"
               ? "Enter your account email to request a password reset link."
               : "Your collection, your details, your own little corner of Vee."}
@@ -303,22 +309,6 @@ export default function AccountPanel({
               />
             </label>
           )}
-          {activeMode === "reset" && !linkToken && (
-            <label>
-              Reset token
-              <input
-                ref={initialFieldRef}
-                data-dialog-autofocus
-                name="code"
-                required
-                minLength={32}
-                maxLength={128}
-                autoComplete="one-time-code"
-                autoCapitalize="none"
-                spellCheck={false}
-              />
-            </label>
-          )}
           {activeMode === "password" && (
             <label>
               Current password
@@ -338,6 +328,8 @@ export default function AccountPanel({
                 ? "New password"
                 : "Password"}
               <input
+                ref={activeMode === "reset" ? initialFieldRef : undefined}
+                data-dialog-autofocus={activeMode === "reset" || undefined}
                 name="password"
                 type="password"
                 required
@@ -373,7 +365,7 @@ export default function AccountPanel({
           </button>
         </fieldset>
       </form>
-      {session.user && activeMode !== "reset" ? (
+      {session.user && activeMode !== "reset" && activeMode !== "forgot" ? (
         <div className="account-actions">
           {showProfileLink && (
             <a
@@ -441,24 +433,26 @@ export default function AccountPanel({
               disabled={busy}
               onClick={() => switchMode("login")}
             >
-              Return to sign in
+              {session.user ? "Return to account" : "Return to sign in"}
             </button>
           )}
-          {activeMode === "forgot" && (
+          {activeMode === "reset" && (
             <button
               className="text-link"
               disabled={busy}
-              onClick={() => switchMode("reset")}
+              onClick={() => switchMode("forgot")}
             >
-              I already have a reset token
+              Request another reset link
             </button>
           )}
         </div>
       )}
-      <p className="form-note session-note">
-        Your sign-in can be restored on this device for up to 14 days. Sign out
-        to end it.
-      </p>
+      {activeMode !== "forgot" && activeMode !== "reset" && (
+        <p className="form-note session-note">
+          Your sign-in can be restored on this device for up to 14 days. Sign
+          out to end it.
+        </p>
+      )}
     </div>
   );
 }
