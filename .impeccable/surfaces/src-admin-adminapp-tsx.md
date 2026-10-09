@@ -13,12 +13,16 @@ Mode: Operate. Audience: Vee administrators handling daily catalog, order, payme
 
 THESIS: A quiet operational studio makes fulfillment and catalog maintenance immediately scannable. The workspace centers real data and direct actions.
 
-OWN-WORLD: The existing Vee paper, ivory, cocoa, peach, and rose-copper system; Bodoni headings, Manrope controls, square fields, fine seams, and flat surfaces. Status tones stay within the warm mineral palette.
+OWN-WORLD: The existing Vee paper, ivory, cocoa, peach, and rose-copper system; A Pacifico Vee signature, DM Sans headings and controls, square fields, fine seams, and flat surfaces. Status tones stay within the warm mineral palette.
 
-STORY: An administrator enters through a role-gated route, checks live sales and stock, then moves into orders, statistics, products, categories, coupons, or customer reports. The backend remains authoritative for permissions and workflow transitions.
+STORY: An administrator enters through a role-gated route, checks live sales and stock, then moves into orders, statistics, products, landing images, categories, coupons, or customer reports. The backend remains authoritative for permissions and workflow transitions.
 
 FIRST VIEWPORT: A narrow left rail holds the Vee admin identity and six task destinations. A slim top bar names the current view. The overview opens with a greeting and refresh action, four live figures, then order flow and top products in aligned panels. On mobile the rail becomes a menu and orders become tappable rows.
 
 FORM: Operational console chosen as a direct extension of the established visual world and explicit capability brief; seed key: direct-extension (no direction roll).
 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance.
+
+## Landing images extension
+
+The fixed Hero and Ritual slots live in the navigation as an Operate task. Each editor shows the current image in desktop and mobile crops, followed by one file chooser, required image description, optional caption, focal point controls, and a Save and publish action. Loading, upload failure, and success remain visible in place. Saving publishes immediately; the bundled images keep the storefront intact if the public API or image URL fails.

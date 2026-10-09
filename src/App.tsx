@@ -14,6 +14,9 @@ import {
 import { useCatalog } from "./catalog/useCatalog";
 import { useSession } from "./auth/Session";
 import { formatPrice } from "./api/store";
+import { imageUrl } from "./api/client";
+import { fallbackLandingImages, landingApi } from "./api/landing";
+import type { LandingImage, LandingSlot } from "./api/landing";
 import type { CheckoutOrder, Product } from "./api/store";
 import { CheckoutPage, OrderConfirmation } from "./checkout/CheckoutPage";
 import { saveReceipt } from "./checkout/receipt";
@@ -25,12 +28,6 @@ import QuantityInput from "./components/QuantityInput";
 import { navigateTo } from "./navigation";
 import ProfilePage from "./profile/ProfilePage";
 import ProductPage from "./product/ProductPage";
-
-import "@fontsource/bodoni-moda/latin-400.css";
-import "@fontsource/bodoni-moda/latin-400-italic.css";
-import "@fontsource/manrope/latin-400.css";
-import "@fontsource/manrope/latin-500.css";
-import "@fontsource/manrope/latin-600.css";
 
 function productSlugFromPath(path: string) {
   const match = path.match(/^\/products\/([^/]+)$/);
@@ -44,6 +41,38 @@ function productSlugFromPath(path: string) {
 
 function App() {
   const [path, setPath] = useState(window.location.pathname);
+  const [landingImages, setLandingImages] = useState<
+    Record<LandingSlot, LandingImage>
+  >(fallbackLandingImages);
+  const [failedLandingImages, setFailedLandingImages] = useState<
+    Record<LandingSlot, boolean>
+  >({ hero: false, ritual: false });
+  const heroImage = failedLandingImages.hero
+    ? fallbackLandingImages.hero
+    : landingImages.hero;
+  const ritualImage = failedLandingImages.ritual
+    ? fallbackLandingImages.ritual
+    : landingImages.ritual;
+  useEffect(() => {
+    const controller = new AbortController();
+    landingApi
+      .list(controller.signal)
+      .then((items) => {
+        setFailedLandingImages({ hero: false, ritual: false });
+        setLandingImages({
+          hero:
+            items.find((item) => item.slot === "hero") ??
+            fallbackLandingImages.hero,
+          ritual:
+            items.find((item) => item.slot === "ritual") ??
+            fallbackLandingImages.ritual,
+        });
+      })
+      .catch(() => {
+        // Bundled images keep the storefront available while the API is offline.
+      });
+    return () => controller.abort();
+  }, []);
   const [placedOrder, setPlacedOrder] = useState<CheckoutOrder | null>(null);
   const { products, categories, loading, error, retry } = useCatalog();
   const session = useSession();
@@ -546,17 +575,30 @@ function App() {
             </div>
             <figure className="hero-image">
               <img
-                src="/images/vee-atelier.webp"
-                srcSet="/images/vee-atelier-640.webp 640w, /images/vee-atelier.webp 1024w"
+                src={
+                  imageUrl(heroImage.imageUrl) ??
+                  fallbackLandingImages.hero.imageUrl
+                }
+                srcSet={`${imageUrl(heroImage.smallImageUrl) ?? fallbackLandingImages.hero.smallImageUrl} 640w, ${imageUrl(heroImage.imageUrl) ?? fallbackLandingImages.hero.imageUrl} 1024w`}
+                style={{
+                  objectPosition: `${heroImage.focalX}% ${heroImage.focalY}%`,
+                }}
+                onError={() => {
+                  if (!failedLandingImages.hero)
+                    setFailedLandingImages((current) => ({
+                      ...current,
+                      hero: true,
+                    }));
+                }}
                 sizes="(max-width: 700px) 100vw, 53vw"
-                alt="Vee concept cosmetics in soft peach-blush and rose gold, arranged on sunlit natural stone"
+                alt={heroImage.altText}
                 fetchPriority="high"
                 width="1024"
                 height="1280"
               />
-              <figcaption>
-                Visual concept. Products shown are illustrative.
-              </figcaption>
+              {heroImage.caption && (
+                <figcaption>{heroImage.caption}</figcaption>
+              )}
             </figure>
           </section>
 
@@ -655,17 +697,30 @@ function App() {
           >
             <figure className="ritual-image">
               <img
-                src="/images/stone-ritual.webp"
-                srcSet="/images/stone-ritual-640.webp 640w, /images/stone-ritual.webp 1024w"
+                src={
+                  imageUrl(ritualImage.imageUrl) ??
+                  fallbackLandingImages.ritual.imageUrl
+                }
+                srcSet={`${imageUrl(ritualImage.smallImageUrl) ?? fallbackLandingImages.ritual.smallImageUrl} 640w, ${imageUrl(ritualImage.imageUrl) ?? fallbackLandingImages.ritual.imageUrl} 1024w`}
+                style={{
+                  objectPosition: `${ritualImage.focalX}% ${ritualImage.focalY}%`,
+                }}
+                onError={() => {
+                  if (!failedLandingImages.ritual)
+                    setFailedLandingImages((current) => ({
+                      ...current,
+                      ritual: true,
+                    }));
+                }}
                 sizes="(max-width: 700px) 100vw, 48vw"
-                alt="Ivory and amber concept cosmetics on natural limestone, surrounded by dried botanicals"
+                alt={ritualImage.altText}
                 loading="lazy"
                 width="1024"
                 height="1280"
               />
-              <figcaption>
-                Visual concept. Products shown are illustrative.
-              </figcaption>
+              {ritualImage.caption && (
+                <figcaption>{ritualImage.caption}</figcaption>
+              )}
             </figure>
             <div className="ritual-copy">
               <h2 id="ritual-title">

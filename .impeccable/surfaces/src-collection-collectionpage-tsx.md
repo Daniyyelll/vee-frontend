@@ -21,8 +21,7 @@ FORM: The `concept-seed --scope surface --mode persuade` roll used seed
 THESIS: A quiet, persistent directory lets a shopper find the right category
 while the products, not invented copy, carry the page.
 
-OWN-WORLD: Warm paper, ivory, cocoa, blush and fine mineral seams; Bodoni Moda
-headings, Manrope controls, square geometry and supplied product photographs.
+OWN-WORLD: Warm paper, ivory, cocoa, blush and fine mineral seams; DM Sans headings and controls, a Pacifico Vee wordmark, square geometry and supplied product photographs.
 No green in authored UI or concept imagery.
 
 STORY: A visitor sees all live categories and their product counts, chooses one,

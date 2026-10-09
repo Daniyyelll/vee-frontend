@@ -4,6 +4,11 @@ import App from "./App";
 import AdminApp from "./admin/AdminApp";
 import { SessionProvider } from "./auth/Session";
 import { useSession } from "./auth/Session";
+import "@fontsource/dm-sans/latin-400.css";
+import "@fontsource/dm-sans/latin-500.css";
+import "@fontsource/dm-sans/latin-600.css";
+import "@fontsource/dm-sans/latin-700.css";
+import "@fontsource/pacifico/latin-400.css";
 import "./styles.css";
 
 function Root() {

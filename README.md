@@ -63,7 +63,8 @@ The client refreshes the access token on expiry and retries a rejected bearer
 request once. Logout clears the local credential and revokes the refresh
 session. Changing or resetting a password invalidates existing access and
 refresh tokens.
-Reset uses the 8-character code in the email; the email URL opens the reset form.
+The reset email links to the form with a 30-minute, single-use token. The
+form also accepts a manually pasted token.
 Never put secrets into `VITE_` variables, which are public client configuration.
 
 The customer bag is stored in this browser tab. Signed-in checkout syncs its

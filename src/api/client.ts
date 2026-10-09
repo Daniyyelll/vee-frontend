@@ -39,6 +39,7 @@ type RequestOptions = {
   signal?: AbortSignal;
   headers?: Record<string, string>;
   credentials?: RequestCredentials;
+  timeoutMs?: number;
 };
 
 let refreshAccessToken:
@@ -59,7 +60,10 @@ export async function request<T>(
   const abort = () => controller.abort();
   options.signal?.addEventListener("abort", abort, { once: true });
   if (options.signal?.aborted) controller.abort();
-  const timer = setTimeout(() => controller.abort(), 15000);
+  const timer = setTimeout(
+    () => controller.abort(),
+    options.timeoutMs ?? 15000,
+  );
   try {
     const response = await fetch(`${apiBase}${path}`, {
       method: options.method ?? "GET",

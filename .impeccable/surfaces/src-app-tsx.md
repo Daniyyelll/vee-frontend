@@ -17,8 +17,7 @@ steering to exclude all greens. Code-led build. Catalog items are now supplied b
 THESIS: A sunlit natural atelier makes the first encounter with Vee feel rich,
 comforting, and unhurried, while keeping shopping immediately available.
 
-OWN-WORLD: Warm ivory, limestone, peach-blush, cocoa, and rose gold from the user reference. Upright sculptural
-serif display lettering, quiet sans-serif controls, broad unboxed photographic
+OWN-WORLD: Warm ivory, limestone, peach-blush, cocoa, and rose gold from the user reference. A Pacifico signature and short editorial accents, clean DM Sans headings and controls, broad unboxed photographic
 surfaces, fine seams, and generous but deliberate spacing. No green.
 
 STORY: A visitor discovers luxury cosmetics through a moment of calm, browses

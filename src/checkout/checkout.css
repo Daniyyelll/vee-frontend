@@ -54,8 +54,8 @@
 .checkout-intro p,
 .checkout-review-heading p {
   color: var(--muted);
-  font-size: 13px;
-  line-height: 1.8;
+  font-size: 15px;
+  line-height: 1.7;
 }
 .checkout-section {
   padding: 32px 0 37px;
@@ -440,7 +440,7 @@
   margin: 0 auto 18px;
 }
 .checkout-empty h3 {
-  font: 29px var(--display);
+  font: 500 29px/1.2 var(--display);
 }
 .checkout-empty p {
   margin: 12px 0 20px;

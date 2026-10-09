@@ -7,6 +7,7 @@ import {
   FolderTree,
   Gift,
   LayoutDashboard,
+  Images,
   LogOut,
   Package,
   ShieldCheck,
@@ -23,6 +24,7 @@ import {
   ReportsSection,
   StatisticsSection,
 } from "./sections";
+import LandingImagesSection from "./LandingImagesSection";
 import "./admin.css";
 
 export type View =
@@ -30,6 +32,7 @@ export type View =
   | "orders"
   | "statistics"
   | "products"
+  | "landing-images"
   | "categories"
   | "coupons"
   | "reports";
@@ -39,6 +42,7 @@ const navigation: { id: View; label: string; icon: typeof LayoutDashboard }[] =
     { id: "orders", label: "Orders", icon: ClipboardList },
     { id: "statistics", label: "Statistics", icon: BarChart3 },
     { id: "products", label: "Products", icon: Package },
+    { id: "landing-images", label: "Landing images", icon: Images },
     { id: "categories", label: "Categories", icon: FolderTree },
     { id: "coupons", label: "Coupons", icon: Gift },
     { id: "reports", label: "Reports", icon: ShieldCheck },
@@ -264,6 +268,9 @@ export default function AdminApp() {
           {view === "orders" && <OrdersSection token={session.token} />}
           {view === "statistics" && <StatisticsSection token={session.token} />}
           {view === "products" && <ProductsSection token={session.token} />}
+          {view === "landing-images" && (
+            <LandingImagesSection token={session.token} />
+          )}
           {view === "categories" && <CategoriesSection token={session.token} />}
           {view === "coupons" && <CouponsSection token={session.token} />}
           {view === "reports" && <ReportsSection token={session.token} />}

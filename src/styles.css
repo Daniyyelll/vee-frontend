@@ -6,8 +6,9 @@
   --cocoa: #4b352a;
   --muted: #795e50;
   --line: #d5c5b7;
-  --display: "Bodoni Moda", Georgia, serif;
-  --body: "Manrope", sans-serif;
+  --brand: "Pacifico", cursive;
+  --display: "DM Sans", Arial, sans-serif;
+  --body: "DM Sans", Arial, sans-serif;
   font-family: var(--body);
   color: var(--cocoa);
   background: var(--paper);
@@ -68,8 +69,8 @@ p {
 h1,
 h2 {
   font-family: var(--display);
-  font-weight: 400;
-  letter-spacing: -0.035em;
+  font-weight: 500;
+  letter-spacing: -0.03em;
   text-wrap: balance;
 }
 em {
@@ -142,11 +143,12 @@ input::placeholder {
   text-decoration: underline;
 }
 .wordmark {
-  font-family: var(--display);
-  font-size: 51px;
-  letter-spacing: -0.07em;
-  line-height: 1;
-  padding-right: 0.07em;
+  font-family: var(--brand);
+  font-size: 43px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.2;
+  padding-right: 0.14em;
 }
 .header-tools {
   display: flex;
@@ -268,14 +270,24 @@ input::placeholder {
   margin: auto 0;
 }
 .hero h1 {
-  font-size: clamp(56px, 5.3vw, 82px);
-  line-height: 1.08;
+  font-size: clamp(52px, 5.15vw, 78px);
+  line-height: 1.1;
+}
+.hero h1 em,
+.section-heading h2 em,
+.ritual-copy h2 em,
+.newsletter h2 em {
+  font-family: var(--brand);
+  font-size: 0.82em;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0;
 }
 .hero-copy p {
   margin-top: 27px;
   color: var(--muted);
-  font-size: 14px;
-  line-height: 1.9;
+  font-size: 16px;
+  line-height: 1.75;
 }
 .solid-link {
   border: 1px solid var(--cocoa);
@@ -439,6 +451,8 @@ input::placeholder {
   background: transparent;
   font-family: var(--display);
   font-size: 25px;
+  font-weight: 500;
+  letter-spacing: -0.025em;
 }
 .product-name:hover {
   text-decoration: underline;
@@ -499,9 +513,9 @@ input::placeholder {
   line-height: 1.18;
 }
 .ritual-copy p {
-  font-size: 13px;
+  font-size: 16px;
   color: #6d4c3b;
-  line-height: 1.9;
+  line-height: 1.75;
   margin-top: 24px;
 }
 .newsletter {
@@ -517,9 +531,9 @@ input::placeholder {
   line-height: 1.18;
 }
 .newsletter p {
-  font-size: 12px;
+  font-size: 15px;
   color: var(--muted);
-  line-height: 1.8;
+  line-height: 1.7;
   margin-top: 16px;
 }
 .newsletter-preview {
@@ -553,7 +567,7 @@ input::placeholder {
   padding-bottom: 39px;
 }
 .footer-top .wordmark {
-  font-size: 66px;
+  font-size: 56px;
 }
 .footer-top p {
   font-size: 12px;
@@ -734,13 +748,13 @@ input::placeholder {
 .empty-state h3 {
   font-family: var(--display);
   font-size: 26px;
-  font-weight: 400;
+  font-weight: 500;
   margin-top: 23px;
 }
 .empty-state p {
   color: var(--muted);
-  font-size: 13px;
-  line-height: 1.8;
+  font-size: 15px;
+  line-height: 1.7;
   margin: 16px 0 25px;
   overflow-wrap: anywhere;
 }
@@ -760,7 +774,7 @@ input::placeholder {
 .bag-item h3 {
   font-family: var(--display);
   font-size: 23px;
-  font-weight: 400;
+  font-weight: 500;
 }
 .bag-item p {
   margin-top: 6px;
@@ -837,9 +851,9 @@ input::placeholder {
   padding: 75px 26px 40px;
 }
 .detail-copy p {
-  font-size: 13px;
+  font-size: 15px;
   color: var(--muted);
-  line-height: 1.8;
+  line-height: 1.7;
 }
 .detail-copy .detail-disclaimer {
   margin-top: 28px;
@@ -882,7 +896,7 @@ input::placeholder {
     height: 590px;
   }
   .hero-copy p {
-    font-size: 12px;
+    font-size: 15px;
   }
   .hero .solid-link {
     padding: 16px;
@@ -927,7 +941,7 @@ input::placeholder {
     display: inline-flex;
   }
   .wordmark {
-    font-size: 45px;
+    font-size: 38px;
   }
   .header-tools {
     gap: 3px;
@@ -978,8 +992,8 @@ input::placeholder {
     font-size: clamp(52px, 11.5vw, 72px);
   }
   .hero-copy p {
-    font-size: 13px;
-    line-height: 1.85;
+    font-size: 16px;
+    line-height: 1.75;
     margin-top: 22px;
   }
   .hero .solid-link {
@@ -1057,7 +1071,7 @@ input::placeholder {
     font-size: 44px;
   }
   .ritual-copy p {
-    font-size: 12px;
+    font-size: 16px;
     margin-top: 20px;
   }
   .newsletter {
@@ -1081,7 +1095,7 @@ input::placeholder {
     padding-bottom: 30px;
   }
   .footer-top .wordmark {
-    font-size: 57px;
+    font-size: 49px;
   }
   .footer-top p {
     font-size: 11px;
@@ -1202,14 +1216,14 @@ input::placeholder {
 .catalog-empty,
 .request-error {
   padding: 30px 0;
-  font-size: 13px;
-  line-height: 1.8;
+  font-size: 15px;
+  line-height: 1.7;
 }
 .catalog-empty h3,
 .request-error h3 {
   font-family: var(--display);
   font-size: 28px;
-  font-weight: 400;
+  font-weight: 500;
   margin-bottom: 12px;
 }
 .request-error p,
@@ -1256,8 +1270,8 @@ input::placeholder {
 .form-intro,
 .account-email {
   color: var(--muted);
-  font-size: 13px;
-  line-height: 1.8;
+  font-size: 15px;
+  line-height: 1.7;
   margin-bottom: 25px;
 }
 .account-form fieldset,
@@ -1365,7 +1379,7 @@ input::placeholder {
 .reviews-panel h3 {
   font-family: var(--display);
   font-size: 29px;
-  font-weight: 400;
+  font-weight: 500;
 }
 .reviews-intro {
   color: var(--muted);
@@ -1397,8 +1411,8 @@ input::placeholder {
   font-variant-numeric: tabular-nums;
 }
 .review-comment {
-  font-size: 13px;
-  line-height: 1.8;
+  font-size: 15px;
+  line-height: 1.7;
   margin-top: 14px;
   white-space: pre-wrap;
 }
