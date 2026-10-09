@@ -1,6 +1,7 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
+import { fallbackLandingImages, landingApi } from "./api/landing";
 import { storeApi } from "./api/store";
 import App from "./App";
 
@@ -181,4 +182,34 @@ it("shows a product page and opens the bag after adding the product", async () =
     true,
   );
   expect(screen.getAllByText("Lip Balm")).toHaveLength(2);
+});
+
+it("renders API landing images on the correct host", async () => {
+  window.history.replaceState({}, "", "/");
+  vi.spyOn(landingApi, "list").mockResolvedValue([
+    {
+      ...fallbackLandingImages.hero,
+      altText: "API hero image",
+    },
+    {
+      ...fallbackLandingImages.ritual,
+      imageUrl:
+        "https://example.supabase.co/storage/v1/object/public/ritual.webp",
+      smallImageUrl:
+        "https://example.supabase.co/storage/v1/object/public/ritual-640.webp",
+      altText: "API ritual image",
+    },
+  ]);
+  render(<App />);
+
+  const hero = await screen.findByRole("img", { name: "API hero image" });
+  expect(hero.getAttribute("src")).toBe("/images/vee-atelier.webp");
+  expect(hero.getAttribute("srcset")).toContain(
+    "/images/vee-atelier-640.webp 640w",
+  );
+
+  const ritual = screen.getByRole("img", { name: "API ritual image" });
+  expect(ritual.getAttribute("src")).toBe(
+    "https://example.supabase.co/storage/v1/object/public/ritual.webp",
+  );
 });

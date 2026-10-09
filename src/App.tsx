@@ -14,8 +14,11 @@ import {
 import { useCatalog } from "./catalog/useCatalog";
 import { useSession } from "./auth/Session";
 import { formatPrice } from "./api/store";
-import { imageUrl } from "./api/client";
-import { fallbackLandingImages, landingApi } from "./api/landing";
+import {
+  fallbackLandingImages,
+  landingApi,
+  landingImageUrl,
+} from "./api/landing";
 import type { LandingImage, LandingSlot } from "./api/landing";
 import type { CheckoutOrder, Product } from "./api/store";
 import { CheckoutPage, OrderConfirmation } from "./checkout/CheckoutPage";
@@ -576,10 +579,10 @@ function App() {
             <figure className="hero-image">
               <img
                 src={
-                  imageUrl(heroImage.imageUrl) ??
+                  landingImageUrl(heroImage.imageUrl) ??
                   fallbackLandingImages.hero.imageUrl
                 }
-                srcSet={`${imageUrl(heroImage.smallImageUrl) ?? fallbackLandingImages.hero.smallImageUrl} 640w, ${imageUrl(heroImage.imageUrl) ?? fallbackLandingImages.hero.imageUrl} 1024w`}
+                srcSet={`${landingImageUrl(heroImage.smallImageUrl) ?? fallbackLandingImages.hero.smallImageUrl} 640w, ${landingImageUrl(heroImage.imageUrl) ?? fallbackLandingImages.hero.imageUrl} 1024w`}
                 style={{
                   objectPosition: `${heroImage.focalX}% ${heroImage.focalY}%`,
                 }}
@@ -698,10 +701,10 @@ function App() {
             <figure className="ritual-image">
               <img
                 src={
-                  imageUrl(ritualImage.imageUrl) ??
+                  landingImageUrl(ritualImage.imageUrl) ??
                   fallbackLandingImages.ritual.imageUrl
                 }
-                srcSet={`${imageUrl(ritualImage.smallImageUrl) ?? fallbackLandingImages.ritual.smallImageUrl} 640w, ${imageUrl(ritualImage.imageUrl) ?? fallbackLandingImages.ritual.imageUrl} 1024w`}
+                srcSet={`${landingImageUrl(ritualImage.smallImageUrl) ?? fallbackLandingImages.ritual.smallImageUrl} 640w, ${landingImageUrl(ritualImage.imageUrl) ?? fallbackLandingImages.ritual.imageUrl} 1024w`}
                 style={{
                   objectPosition: `${ritualImage.focalX}% ${ritualImage.focalY}%`,
                 }}

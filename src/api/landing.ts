@@ -1,4 +1,4 @@
-import { request } from "./client";
+import { imageUrl, request } from "./client";
 
 export type LandingSlot = "hero" | "ritual";
 export type LandingImage = {
@@ -33,6 +33,11 @@ export const fallbackLandingImages: Record<LandingSlot, LandingImage> = {
     focalY: 58,
   },
 };
+
+export function landingImageUrl(value: string): string | null {
+  if (value.startsWith("/images/")) return value;
+  return imageUrl(value);
+}
 
 export const landingApi = {
   list: (signal?: AbortSignal) =>
