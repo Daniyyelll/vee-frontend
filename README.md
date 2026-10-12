@@ -24,7 +24,10 @@ For a separately hosted API, set its full URL including `/api` at build time.
 Configure backend `FRONTEND_URL` to the storefront origin. Vite's proxy is for
 development only; production needs that API URL or a reverse proxy for both
 paths, and SPA fallback for `/collection`, `/checkout`,
-`/order-confirmation`, `/reset-password`, and `/admin`.
+`/order-confirmation`, `/reset-password`, and `/admin`. The root `vercel.json`
+provides this fallback for the storefront routes on Vercel, including
+`/profile` and `/products/:slug`. Add a rewrite there when adding a new
+client-side route.
 
 Docker Desktop's engine must be running before `docker compose up -d postgres`.
 The project database is configured for port 5433 on this development machine;
