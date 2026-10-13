@@ -48,6 +48,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
+  localStorage.clear();
   sessionStorage.clear();
   window.history.replaceState({}, "", "/");
   vi.unstubAllGlobals();
@@ -55,7 +56,7 @@ afterEach(() => {
 });
 
 it("opens the bag as a right drawer and closes it without losing the bag", async () => {
-  sessionStorage.setItem("vee-bag", JSON.stringify({ [productId]: 2 }));
+  localStorage.setItem("vee-bag", JSON.stringify({ [productId]: 2 }));
   const user = userEvent.setup();
   render(<App />);
 
@@ -75,7 +76,54 @@ it("opens the bag as a right drawer and closes it without losing the bag", async
   await user.click(screen.getByRole("button", { name: "Close panel" }));
   await waitFor(() => expect(dialog.hasAttribute("open")).toBe(false));
   expect(bagButton.getAttribute("aria-expanded")).toBe("false");
-  expect(sessionStorage.getItem("vee-bag")).toContain(productId);
+  expect(localStorage.getItem("vee-bag")).toContain(productId);
+});
+
+it("restores added bag items after the tab session ends", async () => {
+  const user = userEvent.setup();
+  const { unmount } = render(<App />);
+
+  await user.click(screen.getByRole("button", { name: "Add Lip Balm to bag" }));
+  await user.click(
+    screen.getByRole("button", { name: "Increase Lip Balm quantity" }),
+  );
+  expect(JSON.parse(localStorage.getItem("vee-bag")!)).toEqual({
+    [productId]: 2,
+  });
+
+  unmount();
+  sessionStorage.clear();
+  render(<App />);
+
+  await user.click(screen.getByRole("button", { name: "Open bag, 2 items" }));
+  expect(
+    screen.getByRole("textbox", { name: "Lip Balm quantity" }),
+  ).toHaveProperty("value", "2");
+});
+
+it("moves an existing tab's bag into persistent storage", () => {
+  sessionStorage.setItem("vee-bag", JSON.stringify({ [productId]: 2 }));
+  render(<App />);
+
+  expect(
+    screen.getByRole("button", { name: "Open bag, 2 items" }),
+  ).toBeTruthy();
+  expect(JSON.parse(localStorage.getItem("vee-bag")!)).toEqual({
+    [productId]: 2,
+  });
+  expect(sessionStorage.getItem("vee-bag")).toBeNull();
+});
+
+it("does not restore an old session bag over an empty persistent bag", () => {
+  localStorage.setItem("vee-bag", "{}");
+  sessionStorage.setItem("vee-bag", JSON.stringify({ [productId]: 2 }));
+  render(<App />);
+
+  expect(
+    screen.getByRole("button", { name: "Open bag, 0 items" }),
+  ).toBeTruthy();
+  expect(localStorage.getItem("vee-bag")).toBe("{}");
+  expect(sessionStorage.getItem("vee-bag")).toBeNull();
 });
 
 it("keeps one shopping CTA and presents newsletter signup as a preview", () => {

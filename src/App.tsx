@@ -89,7 +89,11 @@ function App() {
   const [query, setQuery] = useState("");
   const [bag, setBag] = useState<Record<string, number>>(() => {
     try {
-      const saved = JSON.parse(sessionStorage.getItem("vee-bag") || "{}");
+      const saved = JSON.parse(
+        localStorage.getItem("vee-bag") ??
+          sessionStorage.getItem("vee-bag") ??
+          "{}",
+      );
       if (!saved || typeof saved !== "object" || Array.isArray(saved))
         return {};
       const valid: Record<string, number> = {};
@@ -196,7 +200,12 @@ function App() {
   }, [path]);
 
   useEffect(() => {
-    sessionStorage.setItem("vee-bag", JSON.stringify(bag));
+    try {
+      localStorage.setItem("vee-bag", JSON.stringify(bag));
+      sessionStorage.removeItem("vee-bag");
+    } catch {
+      // Keep the bag usable in memory if browser storage is unavailable.
+    }
   }, [bag]);
 
   useEffect(() => {
