@@ -1,7 +1,7 @@
 .product-page {
   min-height: 70vh;
   padding: 28px 5.5% 110px;
-  background: var(--paper);
+  background: var(--color-background);
 }
 
 .product-breadcrumb {
@@ -9,7 +9,7 @@
   align-items: center;
   gap: 9px;
   min-height: 28px;
-  color: var(--muted);
+  color: var(--color-muted);
   font-size: 11px;
 }
 
@@ -20,7 +20,7 @@
 
 .product-breadcrumb a:hover,
 .product-breadcrumb a:focus-visible {
-  color: var(--cocoa);
+  color: var(--color-primary);
   text-decoration: underline;
   text-underline-offset: 4px;
 }
@@ -36,7 +36,7 @@
 
 .product-media {
   min-width: 0;
-  background: var(--ivory);
+  background: var(--color-surface);
 }
 
 .product-page-image {
@@ -65,7 +65,7 @@
 
 .product-page-price {
   margin-top: 24px;
-  color: var(--cocoa);
+  color: var(--color-primary);
   font-size: 16px;
   font-variant-numeric: tabular-nums;
 }
@@ -73,7 +73,7 @@
 .product-page-description {
   max-width: 55ch;
   margin-top: 30px;
-  color: var(--muted);
+  color: var(--color-muted);
   font-size: 16px;
   line-height: 1.75;
   white-space: pre-wrap;
@@ -95,11 +95,11 @@
 }
 
 .product-page-stock.in-stock {
-  color: var(--cocoa);
+  color: var(--color-text);
 }
 
 .product-page-stock.out-of-stock {
-  color: #743625;
+  color: var(--color-primary);
 }
 
 .product-page-add {
@@ -114,14 +114,14 @@
   align-items: center;
   gap: 9px;
   margin-top: 24px;
-  color: var(--muted);
+  color: var(--color-muted);
   font-size: 12px;
   text-decoration: none;
 }
 
 .product-back-link:hover,
 .product-back-link:focus-visible {
-  color: var(--cocoa);
+  color: var(--color-primary);
   text-decoration: underline;
   text-underline-offset: 4px;
 }
@@ -139,7 +139,7 @@
 .product-image-skeleton,
 .product-copy-skeleton span {
   display: block;
-  background: var(--ivory);
+  background: var(--color-surface);
 }
 
 .product-image-skeleton {
@@ -176,7 +176,7 @@
 .product-page-message p {
   max-width: 55ch;
   margin-top: 26px;
-  color: var(--muted);
+  color: var(--color-muted);
   font-size: 14px;
   line-height: 1.9;
 }

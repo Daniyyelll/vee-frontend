@@ -18,7 +18,7 @@ export default function ProductCard({ product, bagQuantity, onAdd }: Props) {
         href={productPath}
         className="product-image"
         onClick={(event) => navigateTo(event, productPath)}
-        aria-label={`View ${product.productName}`}
+        aria-label={`Discover ${product.productName}`}
       >
         <ProductImage src={product.imageUrl} alt={product.productName} />
         {product.stockQuantity === 0 && (

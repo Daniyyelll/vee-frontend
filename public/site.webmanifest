@@ -4,8 +4,8 @@
   "description": "Explore Vee, a luxury cosmetics storefront inspired by the quiet beauty of nature.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#f4f0e7",
-  "theme_color": "#f4f0e7",
+  "background_color": "#fff9f8",
+  "theme_color": "#fff9f8",
   "orientation": "portrait-primary",
   "icons": [
     {

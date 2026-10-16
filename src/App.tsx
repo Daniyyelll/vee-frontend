@@ -738,16 +738,14 @@ function App() {
               <h2 id="ritual-title">
                 The luxury
                 <br />
-                of <em>slowing down.</em>
+                of <em>being irresistible</em>
               </h2>
               <p>
-                A soft light. A familiar gesture.
-                <br />A few minutes that are yours alone.
+                A touch of elegance. A hint of allure.
+                <br />A beauty that's impossible to ignore.
               </p>
               <p>
-                Inspired by nature’s quieter side, Vee is a place
-                <br className="desktop-break" /> to rediscover the pleasure in
-                the everyday.
+                At Vee, every ritual is an invitation to embrace your femininity, awaken your confidence, <br /> and feel effortlessly beautiful, undeniably captivating, and unapologetically you.
               </p>
             </div>
           </section>
@@ -766,7 +764,7 @@ function App() {
             </div>
             <div className="newsletter-preview">
               <strong>Coming soon</strong>
-              <p>Sign-up is not open yet. No email is collected here.</p>
+              <p>Newsletter is coming soon.</p>
             </div>
           </section>
         </main>

@@ -1,6 +1,6 @@
 .collection-page {
   min-height: 70vh;
-  background: var(--paper);
+  background: var(--color-background);
 }
 
 .collection-intro {
@@ -9,7 +9,7 @@
   justify-content: space-between;
   gap: 30px;
   padding: 76px 5.5% 55px;
-  background: var(--ivory);
+  background: var(--color-surface);
 }
 
 .collection-intro h1 {
@@ -19,7 +19,7 @@
 
 .collection-intro p {
   margin-bottom: 11px;
-  color: var(--muted);
+  color: var(--color-muted);
   font-size: 15px;
 }
 
@@ -45,7 +45,7 @@
 }
 
 .collection-directory nav {
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--color-border);
 }
 
 .collection-directory button {
@@ -57,20 +57,20 @@
   align-items: center;
   padding: 12px 0;
   border: 0;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--color-border);
   background: transparent;
-  color: var(--muted);
+  color: var(--color-muted);
   text-align: left;
   font-size: 13px;
 }
 
 .collection-directory button:hover,
 .collection-directory button.selected {
-  color: var(--cocoa);
+  color: var(--color-primary);
 }
 
 .collection-directory button.selected {
-  border-bottom-color: var(--cocoa);
+  border-bottom-color: var(--color-primary);
 }
 
 .collection-directory button svg {
@@ -104,7 +104,7 @@
   gap: 18px;
   padding-bottom: 24px;
   margin-bottom: 28px;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .collection-gallery-heading h2 {
@@ -114,7 +114,7 @@
 
 .collection-gallery-heading p {
   flex: 0 0 auto;
-  color: var(--muted);
+  color: var(--color-muted);
   font-size: 11px;
   font-variant-numeric: tabular-nums;
 }
