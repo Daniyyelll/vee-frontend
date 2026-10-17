@@ -4,7 +4,7 @@ import { ApiError, messageOf } from "../api/client";
 import { formatPrice, storeApi } from "../api/store";
 import type { Category, Product } from "../api/store";
 import { navigateTo } from "../navigation";
-import ProductImage from "../components/ProductImage";
+import ProductGallery from "../components/ProductGallery";
 import ReviewsPanel from "../components/ReviewsPanel";
 import "./product.css";
 
@@ -136,12 +136,7 @@ export default function ProductPage({
         <>
           <section className="product-stage" aria-labelledby="product-title">
             <div className="product-media">
-              <ProductImage
-                className="product-page-image"
-                src={product.imageUrl}
-                alt={product.productName}
-                eager
-              />
+              <ProductGallery key={product.id} product={product} />
             </div>
             <div className="product-purchase">
               <h1 id="product-title">{product.productName}</h1>

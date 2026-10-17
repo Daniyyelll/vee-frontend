@@ -176,6 +176,30 @@ it("marks the header as open while mobile navigation is expanded", async () => {
   ).toBeNull();
 });
 
+it("dismisses mobile navigation and restores scrolling", async () => {
+  const user = userEvent.setup();
+  render(<App />);
+  await user.click(screen.getByRole("button", { name: "Open navigation" }));
+  expect(document.body.style.overflow).toBe("hidden");
+  const dialog = screen.getByRole<HTMLDialogElement>("dialog", {
+    name: "Navigation menu",
+  });
+  fireEvent(dialog, new Event("cancel", { cancelable: true }));
+  expect(dialog.open).toBe(false);
+  expect(document.body.style.overflow).toBe("");
+
+  await user.click(screen.getByRole("button", { name: "Open navigation" }));
+  fireEvent.click(dialog);
+  expect(dialog.open).toBe(false);
+
+  await user.click(screen.getByRole("button", { name: "Open navigation" }));
+  const nav = screen.getByRole("navigation", { name: "Mobile navigation" });
+  await user.click(nav.querySelector('a[href="/collection"]')!);
+  expect(dialog.open).toBe(false);
+  expect(window.location.pathname).toBe("/collection");
+  expect(document.body.style.overflow).toBe("");
+});
+
 it("opens search inline instead of as a dialog", async () => {
   const user = userEvent.setup();
   const { container } = render(<App />);

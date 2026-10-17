@@ -1305,3 +1305,42 @@
     min-width: 90px;
   }
 }
+.admin-product-photos {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--color-border);
+}
+
+.admin-product-photos > p,
+.admin-product-photos form > p {
+  margin: 12px 0;
+}
+
+.admin-product-photo-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.admin-product-photo-list > div {
+  display: grid;
+  gap: 8px;
+}
+
+.admin-product-photo-list img,
+.admin-product-photo-list .image-placeholder {
+  width: 100%;
+  height: 150px;
+  object-fit: contain;
+  background: var(--color-surface);
+}
+
+.admin-product-photos label {
+  display: grid;
+  gap: 10px;
+}
+
+.admin-product-photos input {
+  max-width: 100%;
+}

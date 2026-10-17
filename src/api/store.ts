@@ -26,6 +26,7 @@ export type Product = {
   currency: string;
   stockQuantity: number;
   imageUrl: string | null;
+  imageUrls?: string[];
 };
 export type Review = {
   id: string;

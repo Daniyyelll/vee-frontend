@@ -935,7 +935,6 @@ input::placeholder {
     height: 72px;
     padding: 0 17px;
   }
-  .site-header.menu-open,
   .site-header.search-open {
     height: auto;
     grid-template-rows: 72px auto;

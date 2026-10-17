@@ -16,6 +16,9 @@ import type { Coupon, Order, OrderStatus, Report } from "../api/admin";
 import { ApiError, imageUrl, messageOf } from "../api/client";
 import type { Category, Product, Review } from "../api/store";
 import type { View } from "./AdminApp";
+import ProductPhotosEditor, {
+  validateProductPhotos,
+} from "./ProductPhotosEditor";
 
 function useResource<T>(
   key: string,
@@ -1041,9 +1044,12 @@ export function ProductsSection({ token }: { token: string }) {
     setSuccess("");
     try {
       if (editing === "new") {
-        const file = data.get("imageFile");
-        if (!(file instanceof File) || !file.size)
-          throw new Error("Choose a product image.");
+        const files = data
+          .getAll("imageFiles")
+          .filter(
+            (file): file is File => file instanceof File && file.size > 0,
+          );
+        validateProductPhotos(files);
         await adminApi.createProduct(token, data);
         setSuccess("Product created.");
       } else if (editing) {
@@ -1177,13 +1183,17 @@ export function ProductsSection({ token }: { token: string }) {
             {editing === "new" && (
               <>
                 <label>
-                  Image
+                  Photos
                   <input
-                    name="imageFile"
+                    name="imageFiles"
                     type="file"
+                    multiple
                     accept="image/png,image/jpeg,image/webp"
                     required
                   />
+                  <small>
+                    Up to 10 photos, 5 MB total. The first photo is the cover.
+                  </small>
                 </label>
               </>
             )}
@@ -1224,9 +1234,15 @@ export function ProductsSection({ token }: { token: string }) {
             </p>
           )}
           {editing !== "new" && (
-            <p className="admin-muted">
-              Product images cannot be changed in this editor.
-            </p>
+            <ProductPhotosEditor
+              key={editing.id}
+              token={token}
+              product={editing}
+              onUpdated={(updated) => {
+                setEditing(updated);
+                products.reload();
+              }}
+            />
           )}
         </section>
       )}

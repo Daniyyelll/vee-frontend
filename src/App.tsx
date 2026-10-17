@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   ArrowRight,
   Check,
@@ -25,6 +25,7 @@ import { CheckoutPage, OrderConfirmation } from "./checkout/CheckoutPage";
 import { saveReceipt } from "./checkout/receipt";
 import CollectionPage from "./collection/CollectionPage";
 import AccountPanel from "./components/AccountPanel";
+import MobileNavigation from "./components/MobileNavigation";
 import ProductCard from "./components/ProductCard";
 import ProductImage from "./components/ProductImage";
 import QuantityInput from "./components/QuantityInput";
@@ -81,6 +82,7 @@ function App() {
   const session = useSession();
   const [category, setCategory] = useState<string>("All");
   const [menuOpen, setMenuOpen] = useState(false);
+  const closeMenu = useCallback(() => setMenuOpen(false), []);
   const [headerVisible, setHeaderVisible] = useState(true);
   const [panel, setPanel] = useState<"bag" | "account" | null>(
     window.location.pathname === "/reset-password" ? "account" : null,
@@ -377,7 +379,7 @@ function App() {
         </nav>
         <button
           className="icon-button mobile-menu"
-          aria-label={menuOpen ? "Close navigation" : "Open navigation"}
+          aria-label="Open navigation"
           aria-expanded={menuOpen}
           aria-controls="mobile-nav"
           onClick={() => setMenuOpen(!menuOpen)}
@@ -503,46 +505,33 @@ function App() {
             )}
           </form>
         )}
-        {menuOpen && (
-          <nav
-            id="mobile-nav"
-            className="mobile-nav"
-            aria-label="Mobile navigation"
-          >
-            <a
-              href="/collection"
-              onClick={(event) => {
-                setMenuOpen(false);
-                navigateTo(event, "/collection");
-              }}
-            >
-              The collection <ArrowRight />
-            </a>
-            <a
-              href={path === "/" ? "#philosophy" : "/#philosophy"}
-              onClick={(event) => {
-                setMenuOpen(false);
-                if (path !== "/") navigateTo(event, "/#philosophy");
-              }}
-            >
-              Our world <ArrowRight />
-            </a>
-            {session.user && (
-              <a
-                href="/profile"
-                onClick={(event) => navigateTo(event, "/profile")}
-              >
-                Your profile <ArrowRight />
-              </a>
-            )}
-            {session.user?.role === "admin" && (
-              <a href="/admin" onClick={(event) => navigateTo(event, "/admin")}>
-                Admin workspace <ArrowRight />
-              </a>
-            )}
-          </nav>
-        )}
       </header>
+      <MobileNavigation open={menuOpen} onClose={closeMenu}>
+        <a
+          href="/collection"
+          onClick={(event) => navigateTo(event, "/collection")}
+        >
+          The collection <ArrowRight />
+        </a>
+        <a
+          href={path === "/" ? "#philosophy" : "/#philosophy"}
+          onClick={(event) => {
+            if (path !== "/") navigateTo(event, "/#philosophy");
+          }}
+        >
+          Our world <ArrowRight />
+        </a>
+        {session.user && (
+          <a href="/profile" onClick={(event) => navigateTo(event, "/profile")}>
+            Your profile <ArrowRight />
+          </a>
+        )}
+        {session.user?.role === "admin" && (
+          <a href="/admin" onClick={(event) => navigateTo(event, "/admin")}>
+            Admin workspace <ArrowRight />
+          </a>
+        )}
+      </MobileNavigation>
 
       {productSlug ? (
         <ProductPage
@@ -745,7 +734,9 @@ function App() {
                 <br />A beauty that's impossible to ignore.
               </p>
               <p>
-                At Vee, every ritual is an invitation to embrace your femininity, awaken your confidence, <br /> and feel effortlessly beautiful, undeniably captivating, and unapologetically you.
+                At Vee, every ritual is an invitation to embrace your
+                femininity, awaken your confidence, <br /> and feel effortlessly
+                beautiful, undeniably captivating, and unapologetically you.
               </p>
             </div>
           </section>

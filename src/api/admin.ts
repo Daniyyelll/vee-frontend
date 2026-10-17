@@ -117,6 +117,22 @@ export const adminApi = {
     request<Product[]>("/products", { signal }),
   createProduct: (token: string, data: FormData) =>
     request<Product>("/products", { method: "POST", token, body: data }),
+  addProductPhotos: (token: string, slug: string, data: FormData) =>
+    request<Product>(`/products/${encoded(slug)}/images`, {
+      method: "POST",
+      token,
+      body: data,
+    }),
+  removeProductPhoto: (token: string, slug: string, url: string) =>
+    request<Product>(
+      `/products/${encoded(slug)}/images?imageUrl=${encoded(url)}`,
+      { method: "DELETE", token },
+    ),
+  setProductCover: (token: string, slug: string, url: string) =>
+    request<Product>(
+      `/products/${encoded(slug)}/images/cover?imageUrl=${encoded(url)}`,
+      { method: "PATCH", token },
+    ),
   updateProduct: (
     token: string,
     slug: string,

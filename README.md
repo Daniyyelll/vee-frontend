@@ -79,8 +79,13 @@ tab storage, then retrieves limited details after refresh. The receipt is valid
 for 30 days; closing the tab removes the local reference. The newsletter is a
 static coming-soon preview with no email form. Hero/ritual images remain labeled concepts;
 catalog imagery and copy come from the backend.
-The admin API currently has no coupon edit/deactivate or product image update
-endpoint; the workspace shows those limits where relevant.
+Products support up to ten ordered photos. The product page shows the complete
+photo with thumbnails, previous/next controls, and mobile swiping. Admins can
+upload multiple photos when creating a product, add photos to existing products,
+choose a cover, and remove photos while keeping at least one. PNG, JPEG, and
+WebP uploads can total up to 5 MB per batch. The cover is used in the collection
+and bag. Deploy backend migration `d17f4b8e2a90` before using these controls.
+The admin API currently has no coupon edit/deactivate endpoint.
 Report review inspection uses the admin-only `GET /api/reviews/{review_id}`
 endpoint in the backend.
 
